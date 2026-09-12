@@ -1,27 +1,21 @@
-/* =========================================================
-CONFIGURACIÓN GENERAL
-========================================================= */
-
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+
 :root {
     --azul-oscuro: #123d60;
     --azul: #21618c;
-    --azul-medio: #367bab;
     --azul-claro: #e9f2f8;
     --verde: #228b5a;
-    --verde-claro: #e4f5ec;
     --rojo: #cf3e45;
-    --amarillo: #d89a1d;
     --gris-fondo: #f4f6f8;
-    --gris-borde: #dfe4e8;
     --texto: #263238;
     --texto-secundario: #68727d;
 }
+
 
 body {
     font-family: Arial, Helvetica, sans-serif;
@@ -30,9 +24,7 @@ body {
 }
 
 
-/* =========================================================
-ENCABEZADO
-========================================================= */
+/* ENCABEZADO */
 
 .encabezado {
     min-height: 120px;
@@ -45,15 +37,13 @@ ENCABEZADO
     box-shadow: 0 3px 12px rgba(0,0,0,0.14);
 }
 
+
 .encabezado-izquierda {
     display: flex;
     align-items: center;
     gap: 26px;
 }
 
-/* =========================================
-LOGO GRANDE
-========================================= */
 
 .logo-contenedor {
     width: 290px;
@@ -65,40 +55,39 @@ LOGO GRANDE
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    padding: 0;
 }
+
 
 .logo-spirax {
     width: 260px;
     height: 84px;
     object-fit: contain;
     transform: scale(1.9);
-    transform-origin: center center;
-    display: block;
 }
+
 
 .titulo-principal h1 {
     font-size: 30px;
     margin-bottom: 5px;
 }
 
+
 .titulo-principal p {
     font-size: 15px;
     opacity: 0.9;
 }
 
+
 .contador {
-    background: rgba(255, 255, 255, 0.13);
-    border: 1px solid rgba(255, 255, 255, 0.20);
+    background: rgba(255,255,255,0.13);
+    border: 1px solid rgba(255,255,255,0.20);
     padding: 14px 20px;
     border-radius: 9px;
     font-weight: bold;
 }
 
 
-/* =========================================================
-CONTENEDOR GENERAL
-========================================================= */
+/* CONTENEDOR */
 
 .contenedor {
     width: 95%;
@@ -107,22 +96,23 @@ CONTENEDOR GENERAL
 }
 
 
-/* =========================================================
-DASHBOARD
-========================================================= */
+/* DASHBOARD */
 
 .dashboard {
     margin-bottom: 28px;
 }
 
+
 .dashboard-titulo {
     margin-bottom: 18px;
 }
+
 
 .dashboard-titulo h2 {
     font-size: 23px;
     color: var(--azul-oscuro);
 }
+
 
 .dashboard-titulo p {
     font-size: 13px;
@@ -131,19 +121,18 @@ DASHBOARD
 }
 
 
-/* =========================================================
-KPIs
-========================================================= */
+/* KPI */
 
 .kpi-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 16px;
-    margin-bottom: 18px;
+    margin-bottom: 22px;
 }
 
+
 .kpi-card {
-    min-height: 120px;
+    min-height: 125px;
     background: white;
     border-radius: 11px;
     border: 1px solid #edf0f2;
@@ -153,6 +142,7 @@ KPIs
     align-items: center;
     gap: 16px;
 }
+
 
 .kpi-icono {
     width: 53px;
@@ -168,6 +158,7 @@ KPIs
     font-size: 25px;
 }
 
+
 .kpi-titulo {
     display: block;
     color: var(--texto-secundario);
@@ -177,28 +168,21 @@ KPIs
     margin-bottom: 5px;
 }
 
+
 .kpi-card h3 {
     color: var(--azul-oscuro);
-    font-size: 25px;
+    font-size: 24px;
     margin-bottom: 4px;
 }
 
+
 .kpi-card small {
     color: var(--texto-secundario);
-    font-size: 12px;
-}
-
-.nota-dashboard {
-    min-height: 10px;
-    color: #916200;
-    font-size: 12px;
-    margin-bottom: 18px;
+    font-size: 11px;
 }
 
 
-/* =========================================================
-TARJETAS
-========================================================= */
+/* TARJETAS */
 
 .tarjeta {
     background: white;
@@ -209,14 +193,17 @@ TARJETAS
     margin-bottom: 25px;
 }
 
+
 .titulo-seccion {
     margin-bottom: 20px;
 }
+
 
 .titulo-seccion h2 {
     color: var(--azul-oscuro);
     font-size: 20px;
 }
+
 
 .titulo-seccion p {
     color: var(--texto-secundario);
@@ -225,9 +212,7 @@ TARJETAS
 }
 
 
-/* =========================================================
-GRÁFICAS MENSUALES
-========================================================= */
+/* GRÁFICAS */
 
 .graficas-grid {
     display: grid;
@@ -236,25 +221,30 @@ GRÁFICAS MENSUALES
     margin-bottom: 20px;
 }
 
+
 .grafica-card {
     min-height: 365px;
     margin-bottom: 0;
 }
 
+
 .titulo-grafica {
     margin-bottom: 20px;
 }
+
 
 .titulo-grafica h3 {
     color: var(--azul-oscuro);
     font-size: 18px;
 }
 
+
 .titulo-grafica p {
     color: var(--texto-secundario);
     font-size: 12px;
     margin-top: 4px;
 }
+
 
 .grafica-barras {
     height: 275px;
@@ -265,6 +255,7 @@ GRÁFICAS MENSUALES
     padding: 20px 7px 0;
     border-bottom: 1px solid #cfd7dd;
 }
+
 
 .barra-columna {
     flex: 1;
@@ -277,6 +268,7 @@ GRÁFICAS MENSUALES
     gap: 5px;
 }
 
+
 .barra-valor {
     min-height: 13px;
     text-align: center;
@@ -284,6 +276,7 @@ GRÁFICAS MENSUALES
     font-weight: bold;
     color: var(--azul-oscuro);
 }
+
 
 .barra {
     width: 70%;
@@ -293,9 +286,11 @@ GRÁFICAS MENSUALES
     background: linear-gradient(180deg, #4389b9, #174d73);
 }
 
+
 .barra-cantidad {
     background: linear-gradient(180deg, #43ad7b, #1d7551);
 }
+
 
 .barra-mes {
     font-size: 10px;
@@ -304,19 +299,14 @@ GRÁFICAS MENSUALES
 }
 
 
-/* =========================================================
-GRÁFICA VENDEDORES
-========================================================= */
-
-.grafica-vendedores-card {
-    margin-top: 20px;
-}
+/* VENDEDORES */
 
 .grafica-vendedores {
     display: flex;
     flex-direction: column;
     gap: 25px;
 }
+
 
 .vendedor-grafica-fila {
     display: grid;
@@ -327,9 +317,6 @@ GRÁFICA VENDEDORES
     border-bottom: 1px solid #edf0f2;
 }
 
-.vendedor-grafica-fila:last-child {
-    border-bottom: none;
-}
 
 .vendedor-grafica-nombre {
     color: var(--azul-oscuro);
@@ -337,24 +324,28 @@ GRÁFICA VENDEDORES
     font-size: 14px;
 }
 
+
 .vendedor-barras {
     display: flex;
     flex-direction: column;
     gap: 9px;
 }
 
+
 .vendedor-barra-linea {
     display: grid;
-    grid-template-columns: 75px 1fr 150px;
+    grid-template-columns: 75px 1fr 160px;
     gap: 12px;
     align-items: center;
 }
+
 
 .vendedor-barra-etiqueta {
     color: var(--texto-secundario);
     font-size: 11px;
     font-weight: bold;
 }
+
 
 .vendedor-barra-fondo {
     height: 20px;
@@ -363,11 +354,13 @@ GRÁFICA VENDEDORES
     overflow: hidden;
 }
 
+
 .vendedor-barra-cotizado {
     height: 100%;
     background: linear-gradient(90deg, #1e5881, #4593c6);
     border-radius: 10px;
 }
+
 
 .vendedor-barra-vendido {
     height: 100%;
@@ -375,24 +368,16 @@ GRÁFICA VENDEDORES
     border-radius: 10px;
 }
 
+
 .vendedor-barra-valor {
     font-size: 12px;
     font-weight: bold;
-    color: var(--texto);
     text-align: right;
     white-space: nowrap;
 }
 
-.sin-datos-vendedor {
-    padding: 35px;
-    text-align: center;
-    color: var(--texto-secundario);
-}
 
-
-/* =========================================================
-BOTONES
-========================================================= */
+/* BOTONES */
 
 .barra-acciones {
     display: flex;
@@ -400,38 +385,33 @@ BOTONES
     margin-bottom: 20px;
 }
 
+
 .btn {
     border: none;
     padding: 11px 18px;
     border-radius: 6px;
     font-weight: bold;
     cursor: pointer;
-    transition: 0.2s;
 }
 
-.btn:hover {
-    opacity: 0.86;
-}
-
-.btn:disabled {
-    opacity: 0.45;
-    cursor: not-allowed;
-}
 
 .btn-azul {
     background: var(--azul);
     color: white;
 }
 
+
 .btn-verde {
     background: var(--verde);
     color: white;
 }
 
+
 .btn-rojo {
     background: var(--rojo);
     color: white;
 }
+
 
 .btn-gris {
     background: #e6e9ec;
@@ -439,9 +419,12 @@ BOTONES
 }
 
 
-/* =========================================================
-FORMULARIO
-========================================================= */
+.btn:disabled {
+    opacity: 0.45;
+}
+
+
+/* FORMULARIO */
 
 .formulario-grid {
     display: grid;
@@ -449,17 +432,19 @@ FORMULARIO
     gap: 18px;
 }
 
+
 .campo {
     display: flex;
     flex-direction: column;
 }
 
+
 .campo label {
     margin-bottom: 6px;
-    color: #374151;
     font-weight: bold;
     font-size: 13px;
 }
+
 
 .campo input,
 .campo select {
@@ -467,26 +452,55 @@ FORMULARIO
     padding: 9px 10px;
     border: 1px solid #d1d5db;
     border-radius: 6px;
-    background: white;
-    font-size: 14px;
 }
 
-.campo input:focus,
-.campo select:focus {
-    outline: none;
-    border-color: #347eb0;
-    box-shadow: 0 0 0 2px rgba(52, 126, 176, 0.08);
+
+.input-moneda {
+    height: 42px;
+    display: flex;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    overflow: hidden;
+    background: white;
 }
+
+
+.input-moneda span {
+    display: flex;
+    align-items: center;
+    padding: 0 11px;
+    background: #edf3f7;
+    color: var(--azul-oscuro);
+    font-size: 12px;
+    font-weight: bold;
+    border-right: 1px solid #d1d5db;
+}
+
+
+.input-moneda input {
+    border: none;
+    border-radius: 0;
+    width: 100%;
+    height: 40px;
+}
+
+
+.input-moneda input:focus {
+    outline: none;
+}
+
 
 .oculto {
     display: none !important;
 }
+
 
 .nota {
     margin-top: 18px;
     color: var(--texto-secundario);
     font-size: 12px;
 }
+
 
 .botones-formulario {
     margin-top: 20px;
@@ -496,9 +510,7 @@ FORMULARIO
 }
 
 
-/* =========================================================
-FILTROS
-========================================================= */
+/* FILTROS */
 
 .filtros {
     display: grid;
@@ -507,41 +519,44 @@ FILTROS
     margin-bottom: 20px;
 }
 
+
 .filtros input,
 .filtros select {
     height: 42px;
     padding: 10px;
     border: 1px solid #d1d5db;
     border-radius: 6px;
-    background: white;
 }
 
 
-/* =========================================================
-TABLAS
-========================================================= */
+/* TABLAS */
 
 .tabla-contenedor {
     overflow-x: auto;
 }
+
 
 table {
     width: 100%;
     border-collapse: collapse;
 }
 
+
 #tablaProyectos {
-    min-width: 1650px;
+    min-width: 1550px;
 }
+
 
 .tabla-vendedores {
     min-width: 750px;
 }
 
+
 thead {
     background: var(--azul-oscuro);
     color: white;
 }
+
 
 th {
     padding: 11px;
@@ -550,29 +565,15 @@ th {
     font-size: 12px;
 }
 
+
 td {
     padding: 10px;
     border-bottom: 1px solid #e6e9ec;
     font-size: 12px;
-    vertical-align: middle;
-}
-
-tbody tr:hover {
-    background: #f7f9fa;
-}
-
-.tabla-vendedores td {
-    font-size: 13px;
-}
-
-.tabla-vendedores td:first-child {
-    font-weight: bold;
 }
 
 
-/* =========================================================
-ESTATUS
-========================================================= */
+/* ESTATUS */
 
 .estatus {
     display: inline-block;
@@ -580,28 +581,32 @@ ESTATUS
     border-radius: 14px;
     font-size: 11px;
     font-weight: bold;
-    white-space: nowrap;
 }
+
 
 .estatus-abierto {
     background: #dcecff;
     color: #1656a5;
 }
 
+
 .estatus-cotizacion {
     background: #fff1c8;
     color: #906000;
 }
+
 
 .estatus-ganado {
     background: #dcf5e7;
     color: #167247;
 }
 
+
 .estatus-cerrado {
     background: #e4e7ff;
     color: #4238a0;
 }
+
 
 .estatus-perdido {
     background: #fde4e6;
@@ -609,79 +614,52 @@ ESTATUS
 }
 
 
-/* =========================================================
-MODAL
-========================================================= */
+/* MODAL */
 
 .modal {
     display: none;
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.50);
+    inset: 0;
+    background: rgba(0,0,0,0.5);
     justify-content: center;
     align-items: center;
     z-index: 1000;
 }
 
+
 .modal-contenido {
-    width: 440px;
-    max-width: 92%;
     background: white;
-    border-radius: 11px;
     padding: 30px;
-    box-shadow: 0 15px 45px rgba(0,0,0,0.22);
+    border-radius: 10px;
+    width: 430px;
     text-align: center;
 }
 
-.modal-contenido h2 {
-    color: var(--azul-oscuro);
-    margin-bottom: 10px;
-}
 
 .modal-contenido p {
-    color: var(--texto-secundario);
-    margin-bottom: 25px;
-}
-
-.modal-contenido button {
-    margin: 5px;
+    margin: 15px 0 20px;
 }
 
 
-/* =========================================================
-ENCABEZADO IMPRESIÓN
-========================================================= */
+/* IMPRESIÓN */
 
 .encabezado-impresion {
     display: none;
 }
 
-.impresion-logo {
-    width: 280px;
-    height: 95px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-}
 
 .impresion-logo img {
-    width: 250px;
-    height: 85px;
+    width: 235px;
+    height: 80px;
     object-fit: contain;
     transform: scale(1.9);
-    transform-origin: center center;
 }
 
 
-/* =========================================================
-RESPONSIVE
-========================================================= */
+/* RESPONSIVE */
 
 @media(max-width: 1150px) {
+
     .kpi-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -690,76 +668,25 @@ RESPONSIVE
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .filtros {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media(max-width: 900px) {
     .graficas-grid {
         grid-template-columns: 1fr;
     }
 
-    .vendedor-grafica-fila {
-        grid-template-columns: 1fr;
-    }
 }
 
+
 @media(max-width: 700px) {
-    .encabezado {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 18px;
-        padding: 20px;
-    }
 
-    .encabezado-izquierda {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .logo-contenedor {
-        width: 250px;
-        min-width: 250px;
-        height: 88px;
-    }
-
-    .logo-spirax {
-        width: 220px;
-        height: 72px;
-        transform: scale(1.7);
-    }
-
-    .kpi-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .formulario-grid {
-        grid-template-columns: 1fr;
-    }
-
+    .kpi-grid,
+    .formulario-grid,
     .filtros {
         grid-template-columns: 1fr;
     }
 
-    .barra-acciones {
-        flex-direction: column;
-    }
-
-    .vendedor-barra-linea {
-        grid-template-columns: 65px 1fr;
-    }
-
-    .vendedor-barra-valor {
-        grid-column: 2;
-        text-align: left;
-    }
 }
 
 
-/* =========================================================
-IMPRESIÓN / PDF
-========================================================= */
+/* PDF */
 
 @media print {
 
@@ -768,14 +695,17 @@ IMPRESIÓN / PDF
         margin: 8mm;
     }
 
+
     * {
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
     }
 
+
     body {
         background: white;
     }
+
 
     .no-print,
     .encabezado,
@@ -786,42 +716,20 @@ IMPRESIÓN / PDF
         display: none !important;
     }
 
+
     .encabezado-impresion {
         display: flex !important;
-        align-items: center;
         justify-content: space-between;
+        align-items: center;
         border-bottom: 2px solid #123d60;
-        padding-bottom: 8px;
-        margin-bottom: 14px;
+        margin-bottom: 10px;
     }
 
-    .impresion-logo {
-        width: 260px;
-        height: 90px;
-    }
-
-    .impresion-logo img {
-        width: 235px;
-        height: 80px;
-        object-fit: contain;
-        transform: scale(1.9);
-        transform-origin: center center;
-    }
 
     .impresion-datos {
         text-align: right;
     }
 
-    .encabezado-impresion h1 {
-        color: #123d60;
-        font-size: 20px;
-        margin-bottom: 4px;
-    }
-
-    .encabezado-impresion p {
-        color: #555;
-        font-size: 8px;
-    }
 
     .contenedor {
         width: 100%;
@@ -829,187 +737,93 @@ IMPRESIÓN / PDF
         margin: 0;
     }
 
-    .dashboard {
-        display: block !important;
-        margin: 0;
-    }
-
-    .dashboard-titulo {
-        margin-bottom: 8px;
-    }
-
-    .dashboard-titulo h2 {
-        font-size: 15px;
-    }
-
-    .dashboard-titulo p {
-        font-size: 8px;
-    }
 
     .kpi-grid {
-        display: grid !important;
         grid-template-columns: repeat(4, 1fr);
         gap: 6px;
-        margin-bottom: 8px;
-        page-break-inside: avoid;
     }
 
+
     .kpi-card {
-        min-height: 67px;
+        min-height: 72px;
         padding: 8px;
-        border: 1px solid #dbe1e5;
         box-shadow: none;
-        border-radius: 5px;
-        gap: 8px;
     }
+
 
     .kpi-icono {
         width: 30px;
         min-width: 30px;
         height: 30px;
-        font-size: 15px;
-        border-radius: 5px;
+        font-size: 14px;
     }
 
-    .kpi-titulo {
-        font-size: 6px;
-        margin-bottom: 2px;
-    }
 
     .kpi-card h3 {
-        font-size: 13px;
-        margin-bottom: 2px;
+        font-size: 12px;
     }
+
 
     .kpi-card small {
         font-size: 6px;
     }
 
-    .nota-dashboard {
-        font-size: 6px;
-        margin-bottom: 5px;
-    }
 
     .graficas-grid {
-        display: grid !important;
         grid-template-columns: 1fr 1fr;
         gap: 8px;
-        margin-bottom: 8px;
-        page-break-inside: avoid;
     }
+
 
     .grafica-card {
-        min-height: 205px;
+        min-height: 220px;
         padding: 10px;
-        border: 1px solid #dbe1e5;
         box-shadow: none;
-        margin: 0;
     }
 
-    .titulo-grafica {
-        margin-bottom: 6px;
-    }
-
-    .titulo-grafica h3 {
-        font-size: 11px;
-    }
-
-    .titulo-grafica p {
-        font-size: 6px;
-    }
 
     .grafica-barras {
-        height: 145px;
-        padding: 5px 3px 0;
+        height: 160px;
     }
 
-    .barra-valor {
-        font-size: 6px;
-    }
 
+    .barra-valor,
     .barra-mes {
         font-size: 6px;
     }
 
+
     .grafica-vendedores-card {
         page-break-before: always;
-        break-before: page;
-        padding: 12px;
-        border: 1px solid #dbe1e5;
         box-shadow: none;
-        margin-bottom: 10px;
     }
 
-    .grafica-vendedores-card .titulo-seccion {
-        margin-bottom: 9px;
-    }
-
-    .grafica-vendedores-card .titulo-seccion h2 {
-        font-size: 14px;
-    }
-
-    .grafica-vendedores-card .titulo-seccion p {
-        font-size: 7px;
-    }
-
-    .grafica-vendedores {
-        gap: 9px;
-    }
 
     .vendedor-grafica-fila {
-        grid-template-columns: 120px 1fr;
-        gap: 8px;
-        padding-bottom: 7px;
-    }
-
-    .vendedor-grafica-nombre {
-        font-size: 8px;
-    }
-
-    .vendedor-barras {
-        gap: 4px;
-    }
-
-    .vendedor-barra-linea {
-        grid-template-columns: 48px 1fr 90px;
-        gap: 5px;
-    }
-
-    .vendedor-barra-etiqueta {
-        font-size: 6px;
-    }
-
-    .vendedor-barra-fondo {
-        height: 9px;
-    }
-
-    .vendedor-barra-valor {
-        font-size: 6px;
-    }
-
-    .vendedor-resumen {
-        padding: 10px;
-        border: 1px solid #dbe1e5;
-        box-shadow: none;
-        margin-bottom: 8px;
         page-break-inside: avoid;
     }
 
-    .vendedor-resumen .titulo-seccion {
-        margin-bottom: 7px;
+
+    .vendedor-barra-linea {
+        grid-template-columns: 55px 1fr 110px;
     }
 
-    .vendedor-resumen .titulo-seccion h2 {
-        font-size: 12px;
+
+    .vendedor-barra-valor,
+    .vendedor-barra-etiqueta {
+        font-size: 7px;
     }
 
-    .vendedor-resumen .titulo-seccion p {
-        font-size: 6px;
+
+    .vendedor-resumen {
+        box-shadow: none;
     }
+
 
     .tabla-vendedores {
         min-width: 0;
     }
+
 
     .tabla-vendedores th,
     .tabla-vendedores td {
@@ -1017,38 +831,29 @@ IMPRESIÓN / PDF
         padding: 4px;
     }
 
+
     .proyectos-registrados {
         page-break-before: always;
-        break-before: page;
-        padding: 0;
-        margin: 0;
-        border: none;
         box-shadow: none;
+        border: none;
+        padding: 0;
     }
+
 
     #tablaProyectos {
         min-width: 0;
-        width: 100%;
     }
+
 
     #tablaProyectos th,
     #tablaProyectos td {
-        font-size: 6.5px;
-        padding: 3px;
-        white-space: normal;
-    }
-
-    #tablaProyectos thead {
-        background: #123d60 !important;
-        color: white !important;
-    }
-
-    .estatus {
         font-size: 6px;
-        padding: 2px 4px;
+        padding: 3px;
     }
+
 
     body.reporte-ventas .confidencial {
         display: none !important;
     }
+
 }

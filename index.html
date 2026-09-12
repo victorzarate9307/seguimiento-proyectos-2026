@@ -2,7 +2,6 @@
 <html lang="es">
 
 <head>
-
     <meta charset="UTF-8">
 
     <meta
@@ -10,29 +9,25 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>
-        Seguimiento de Proyectos
-    </title>
+    <title>Seguimiento de Proyectos</title>
 
     <link
         rel="stylesheet"
         href="style.css"
     >
-
 </head>
 
 
 <body>
 
 
-    <!-- ==================================================
-    ENCABEZADO PRINCIPAL
-    =================================================== -->
+    <!-- ================================================
+    ENCABEZADO
+    ================================================= -->
 
     <header class="encabezado">
 
         <div class="encabezado-izquierda">
-
 
             <div class="logo-contenedor">
 
@@ -64,9 +59,7 @@
         <div class="contador">
 
             <span id="contadorProyectos">
-
                 0 proyectos registrados
-
             </span>
 
         </div>
@@ -75,9 +68,9 @@
 
 
 
-    <!-- ==================================================
-    ENCABEZADO PARA IMPRESIÓN
-    =================================================== -->
+    <!-- ================================================
+    ENCABEZADO DE IMPRESIÓN
+    ================================================= -->
 
     <section class="encabezado-impresion">
 
@@ -94,9 +87,7 @@
         <div class="impresion-datos">
 
             <h1 id="tituloReporte">
-
                 Reporte de Proyectos
-
             </h1>
 
             <p id="datosReporte"></p>
@@ -107,42 +98,31 @@
 
 
 
-    <!-- ==================================================
-    CONTENIDO
-    =================================================== -->
-
     <main class="contenedor">
 
 
-
-        <!-- ==================================================
+        <!-- ================================================
         DASHBOARD
-        =================================================== -->
+        ================================================= -->
 
         <section class="dashboard">
 
 
             <div class="dashboard-titulo">
 
-                <div>
+                <h2>
+                    Resumen ejecutivo
+                </h2>
 
-                    <h2>
-                        Resumen ejecutivo
-                    </h2>
-
-                    <p id="periodoActual">
-                        Indicadores del mes actual
-                    </p>
-
-                </div>
+                <p id="periodoActual">
+                    Indicadores del mes actual
+                </p>
 
             </div>
 
 
 
-            <!-- ==================================================
-            KPI
-            =================================================== -->
+            <!-- KPI -->
 
             <div class="kpi-grid">
 
@@ -160,11 +140,11 @@
                         </span>
 
                         <h3 id="kpiCotizado">
-                            $0.00
+                            USD $0.00
                         </h3>
 
                         <small>
-                            MXN equivalente
+                            Precio final enviado a Ventas
                         </small>
 
                     </div>
@@ -186,7 +166,7 @@
                         </span>
 
                         <h3 id="kpiVendido">
-                            $0.00
+                            USD $0.00
                         </h3>
 
                         <small>
@@ -254,16 +234,9 @@
 
 
 
-            <div
-                class="nota-dashboard"
-                id="notaTipoCambio">
-            </div>
-
-
-
-            <!-- ==================================================
+            <!-- ================================================
             GRÁFICAS MENSUALES
-            =================================================== -->
+            ================================================= -->
 
             <div class="graficas-grid">
 
@@ -315,9 +288,9 @@
 
 
 
-            <!-- ==================================================
-            GRÁFICA VENDEDORES
-            =================================================== -->
+            <!-- ================================================
+            GRÁFICA POR VENDEDOR
+            ================================================= -->
 
             <div class="tarjeta grafica-vendedores-card">
 
@@ -328,11 +301,7 @@
                         Cotizado vs Vendido por vendedor
                     </h2>
 
-                    <p id="periodoGraficaVendedores">
-
-                        Acumulado del año actual
-
-                    </p>
+                    <p id="periodoGraficaVendedores"></p>
 
                 </div>
 
@@ -347,9 +316,9 @@
 
 
 
-            <!-- ==================================================
+            <!-- ================================================
             TABLA VENDEDORES
-            =================================================== -->
+            ================================================= -->
 
             <div class="tarjeta vendedor-resumen">
 
@@ -365,8 +334,8 @@
                 </div>
 
 
-
                 <div class="tabla-contenedor">
+
 
                     <table class="tabla-vendedores">
 
@@ -384,7 +353,7 @@
                                 </th>
 
                                 <th>
-                                    Monto cotizado
+                                    Monto cotizado USD
                                 </th>
 
                                 <th>
@@ -392,7 +361,7 @@
                                 </th>
 
                                 <th>
-                                    Vendido
+                                    Vendido USD
                                 </th>
 
                                 <th>
@@ -404,12 +373,12 @@
                         </thead>
 
 
-
                         <tbody id="tablaVendedores">
                         </tbody>
 
 
                     </table>
+
 
                 </div>
 
@@ -421,9 +390,9 @@
 
 
 
-        <!-- ==================================================
-        ACCIONES
-        =================================================== -->
+        <!-- ================================================
+        BOTONES
+        ================================================= -->
 
         <section class="barra-acciones no-print">
 
@@ -453,9 +422,9 @@
 
 
 
-        <!-- ==================================================
+        <!-- ================================================
         FORMULARIO
-        =================================================== -->
+        ================================================= -->
 
         <section
             class="tarjeta no-print"
@@ -466,9 +435,7 @@
             <div class="titulo-seccion">
 
                 <h2 id="tituloFormulario">
-
                     Nuevo proyecto
-
                 </h2>
 
             </div>
@@ -491,7 +458,7 @@
                         <input
                             type="text"
                             id="oportunidad"
-                            placeholder="Ej. OP-2026-001"
+                            placeholder="Ej. OPP-000000"
                         >
 
                     </div>
@@ -633,37 +600,23 @@
                     <div class="campo">
 
                         <label>
-                            Precio de venta
+                            Precio de venta (USD)
                         </label>
 
-                        <input
-                            type="number"
-                            id="precioVenta"
-                            step="0.01"
-                            placeholder="0.00"
-                        >
+                        <div class="input-moneda">
 
-                    </div>
+                            <span>
+                                USD $
+                            </span>
 
+                            <input
+                                type="number"
+                                id="precioVenta"
+                                step="0.01"
+                                placeholder="0.00"
+                            >
 
-
-                    <div class="campo">
-
-                        <label>
-                            Moneda de venta
-                        </label>
-
-                        <select id="monedaVenta">
-
-                            <option value="MXN">
-                                MXN
-                            </option>
-
-                            <option value="USD">
-                                USD
-                            </option>
-
-                        </select>
+                        </div>
 
                     </div>
 
@@ -734,7 +687,7 @@
                             type="number"
                             id="tipoCambio"
                             step="0.0001"
-                            placeholder="Ej. 17.50"
+                            placeholder="Dato informativo"
                         >
 
                     </div>
@@ -780,8 +733,11 @@
 
                 <div class="nota">
 
-                    Puedes guardar el proyecto aunque todavía falte información
-                    y completarlo posteriormente.
+                    Todos los precios de venta son registrados
+                    directamente en USD.
+
+                    El tipo de cambio es únicamente informativo
+                    y no participa en ningún cálculo.
 
                 </div>
 
@@ -795,11 +751,8 @@
                         class="btn btn-gris"
                         id="btnLimpiar"
                     >
-
                         Limpiar
-
                     </button>
-
 
 
                     <button
@@ -807,11 +760,8 @@
                         class="btn btn-verde"
                         id="btnGuardar"
                     >
-
                         Guardar
-
                     </button>
-
 
 
                     <button
@@ -820,9 +770,7 @@
                         id="btnEditar"
                         disabled
                     >
-
                         Guardar cambios
-
                     </button>
 
 
@@ -836,9 +784,9 @@
 
 
 
-        <!-- ==================================================
+        <!-- ================================================
         PROYECTOS REGISTRADOS
-        =================================================== -->
+        ================================================= -->
 
         <section class="tarjeta proyectos-registrados">
 
@@ -852,8 +800,6 @@
             </div>
 
 
-
-            <!-- FILTROS -->
 
             <div class="filtros no-print">
 
@@ -932,9 +878,7 @@
                     class="btn btn-gris"
                     id="btnLimpiarFiltros"
                 >
-
                     Limpiar filtros
-
                 </button>
 
 
@@ -943,6 +887,7 @@
 
 
             <div class="tabla-contenedor">
+
 
                 <table id="tablaProyectos">
 
@@ -980,11 +925,7 @@
                             </th>
 
                             <th>
-                                Precio venta
-                            </th>
-
-                            <th>
-                                Moneda
+                                Precio venta USD
                             </th>
 
                             <th class="confidencial">
@@ -1016,12 +957,12 @@
                     </thead>
 
 
-
                     <tbody id="cuerpoTabla">
                     </tbody>
 
 
                 </table>
+
 
             </div>
 
@@ -1033,9 +974,9 @@
 
 
 
-    <!-- ==================================================
+    <!-- ================================================
     MODAL REPORTE
-    =================================================== -->
+    ================================================= -->
 
     <div
         class="modal no-print"

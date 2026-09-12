@@ -1,24 +1,19 @@
 // ======================================================
-// BASE DE DATOS LOCAL
+// DATOS
 // ======================================================
 
 let proyectos =
     JSON.parse(
-        localStorage.getItem(
-            "proyectos"
-        )
-    )
-    ||
-    [];
+        localStorage.getItem("proyectos")
+    ) || [];
 
 
-let proyectoEditando =
-    null;
+let proyectoEditando = null;
 
 
 
 // ======================================================
-// ELEMENTOS DEL FORMULARIO
+// ELEMENTOS
 // ======================================================
 
 const formulario =
@@ -75,12 +70,6 @@ const precioVenta =
     );
 
 
-const monedaVenta =
-    document.getElementById(
-        "monedaVenta"
-    );
-
-
 const precioContratista =
     document.getElementById(
         "precioContratista"
@@ -117,11 +106,6 @@ const cuerpoTabla =
     );
 
 
-
-// ======================================================
-// FILTROS
-// ======================================================
-
 const buscar =
     document.getElementById(
         "buscar"
@@ -148,194 +132,89 @@ const filtroVendedor =
 
 
 // ======================================================
-// GUARDAR LOCAL STORAGE
+// UTILIDADES
 // ======================================================
 
 function guardarLocalStorage() {
 
     localStorage.setItem(
-
         "proyectos",
-
         JSON.stringify(
             proyectos
         )
-
     );
 
 }
 
-
-
-// ======================================================
-// ESCAPAR HTML
-// ======================================================
 
 function escaparHTML(texto) {
 
     return String(
         texto ?? ""
     )
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 
-    .replaceAll(
-        "&",
-        "&amp;"
+}
+
+
+function formatearNumero(valor) {
+
+    return Number(
+        valor || 0
     )
-
-    .replaceAll(
-        "<",
-        "&lt;"
-    )
-
-    .replaceAll(
-        ">",
-        "&gt;"
-    )
-
-    .replaceAll(
-        '"',
-        "&quot;"
-    )
-
-    .replaceAll(
-        "'",
-        "&#039;"
+    .toLocaleString(
+        "en-US",
+        {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }
     );
 
 }
 
 
+function formatearUSD(valor) {
 
-// ======================================================
-// FORMATO DINERO
-// ======================================================
+    return "USD $" +
 
-function formatearDinero(valor) {
-
-    if (
-        valor === ""
-        ||
-        valor === null
-        ||
-        valor === undefined
-    ) {
-
-        return "";
-
-    }
-
-
-    const numero =
-        Number(valor);
-
-
-    if (
-        Number.isNaN(
-            numero
+        Number(
+            valor || 0
         )
-    ) {
-
-        return "";
-
-    }
-
-
-    return numero.toLocaleString(
-
-        "es-MX",
-
-        {
-
-            minimumFractionDigits:
-                2,
-
-            maximumFractionDigits:
-                2
-
-        }
-
-    );
+        .toLocaleString(
+            "en-US",
+            {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }
+        );
 
 }
 
-
-
-// ======================================================
-// FORMATO MXN
-// ======================================================
-
-function formatearMXN(valor) {
-
-    const numero =
-        Number(valor)
-        ||
-        0;
-
-
-    return numero.toLocaleString(
-
-        "es-MX",
-
-        {
-
-            style:
-                "currency",
-
-            currency:
-                "MXN",
-
-            minimumFractionDigits:
-                2,
-
-            maximumFractionDigits:
-                2
-
-        }
-
-    );
-
-}
-
-
-
-// ======================================================
-// FORMATO COMPACTO
-// ======================================================
 
 function numeroCompacto(numero) {
 
     return new Intl.NumberFormat(
-
-        "es-MX",
-
+        "en-US",
         {
-
-            notation:
-                "compact",
-
-            maximumFractionDigits:
-                1
-
+            notation: "compact",
+            maximumFractionDigits: 1
         }
-
-    ).format(
+    )
+    .format(
         numero || 0
     );
 
 }
 
 
-
-// ======================================================
-// FORMATO FECHA
-// ======================================================
-
 function formatearFecha(fecha) {
 
     if (!fecha) {
-
         return "";
-
     }
 
 
@@ -343,17 +222,7 @@ function formatearFecha(fecha) {
         fecha.split("-");
 
 
-    if (
-        partes.length !== 3
-    ) {
-
-        return fecha;
-
-    }
-
-
     return (
-
         partes[2]
         +
         "/"
@@ -363,7 +232,6 @@ function formatearFecha(fecha) {
         "/"
         +
         partes[0]
-
     );
 
 }
@@ -371,87 +239,7 @@ function formatearFecha(fecha) {
 
 
 // ======================================================
-// CONVERTIR PRECIO DE VENTA A MXN
-// ======================================================
-
-function precioVentaMXN(proyecto) {
-
-    const precio =
-        Number(
-            proyecto.precioVenta
-        )
-        ||
-        0;
-
-
-    if (
-        proyecto.monedaVenta ===
-        "USD"
-    ) {
-
-        const tc =
-            Number(
-                proyecto.tipoCambio
-            )
-            ||
-            0;
-
-
-        if (
-            tc <= 0
-        ) {
-
-            return 0;
-
-        }
-
-
-        return (
-            precio
-            *
-            tc
-        );
-
-    }
-
-
-    return precio;
-
-}
-
-
-
-// ======================================================
-// PROYECTO USD SIN TC
-// ======================================================
-
-function requiereTipoCambio(proyecto) {
-
-    return (
-
-        proyecto.monedaVenta ===
-        "USD"
-
-        &&
-
-        Number(
-            proyecto.precioVenta
-        ) > 0
-
-        &&
-
-        Number(
-            proyecto.tipoCambio
-        ) <= 0
-
-    );
-
-}
-
-
-
-// ======================================================
-// COLOR DEL ESTATUS
+// ESTATUS
 // ======================================================
 
 function claseEstatus(estado) {
@@ -460,9 +248,7 @@ function claseEstatus(estado) {
         estado ===
         "Abierto"
     ) {
-
         return "estatus-abierto";
-
     }
 
 
@@ -470,9 +256,7 @@ function claseEstatus(estado) {
         estado ===
         "En cotización"
     ) {
-
         return "estatus-cotizacion";
-
     }
 
 
@@ -480,9 +264,7 @@ function claseEstatus(estado) {
         estado ===
         "Ganado"
     ) {
-
         return "estatus-ganado";
-
     }
 
 
@@ -490,9 +272,7 @@ function claseEstatus(estado) {
         estado ===
         "Cerrado"
     ) {
-
         return "estatus-cerrado";
-
     }
 
 
@@ -500,9 +280,7 @@ function claseEstatus(estado) {
         estado ===
         "Perdido"
     ) {
-
         return "estatus-perdido";
-
     }
 
 
@@ -513,7 +291,7 @@ function claseEstatus(estado) {
 
 
 // ======================================================
-// MOSTRAR FECHA GANADO
+// FECHA GANADO
 // ======================================================
 
 function actualizarCampoGanado() {
@@ -547,87 +325,63 @@ function actualizarCampoGanado() {
 
 
 estatus.addEventListener(
-
     "change",
-
     actualizarCampoGanado
-
 );
 
 
 
 // ======================================================
-// GUARDAR PROYECTO NUEVO
+// GUARDAR
 // ======================================================
 
 formulario.addEventListener(
-
     "submit",
-
     function(event) {
-
 
         event.preventDefault();
 
 
         const nuevoProyecto = {
 
-
             id:
                 Date.now(),
-
 
             oportunidad:
                 oportunidad.value.trim(),
 
-
             tipoProyecto:
                 tipoProyecto.value,
-
 
             fechaSolicitud:
                 fechaSolicitud.value,
 
-
             vendedor:
                 vendedor.value.trim(),
-
 
             fechaCotizacion:
                 fechaCotizacion.value,
 
-
             estatus:
                 estatus.value,
-
 
             fechaGanado:
                 fechaGanado.value,
 
-
             precioVenta:
                 precioVenta.value,
-
-
-            monedaVenta:
-                monedaVenta.value,
-
 
             precioContratista:
                 precioContratista.value,
 
-
             monedaContratista:
                 monedaContratista.value,
-
 
             contratista:
                 contratista.value.trim(),
 
-
             tipoCambio:
                 tipoCambio.value,
-
 
             margen:
                 margen.value
@@ -649,34 +403,30 @@ formulario.addEventListener(
         actualizarSistema();
 
     }
-
 );
 
 
 
 // ======================================================
-// FILTRAR PROYECTOS
+// FILTROS
 // ======================================================
 
 function proyectosFiltrados() {
 
     const texto =
         buscar.value
-        .toLowerCase()
-        .trim();
+            .toLowerCase()
+            .trim();
 
 
     return proyectos.filter(
-
         function(proyecto) {
 
 
             const coincideTexto =
 
                 (
-                    proyecto.oportunidad
-                    ||
-                    ""
+                    proyecto.oportunidad || ""
                 )
                 .toLowerCase()
                 .includes(texto)
@@ -684,9 +434,7 @@ function proyectosFiltrados() {
                 ||
 
                 (
-                    proyecto.vendedor
-                    ||
-                    ""
+                    proyecto.vendedor || ""
                 )
                 .toLowerCase()
                 .includes(texto)
@@ -694,9 +442,7 @@ function proyectosFiltrados() {
                 ||
 
                 (
-                    proyecto.contratista
-                    ||
-                    ""
+                    proyecto.contratista || ""
                 )
                 .toLowerCase()
                 .includes(texto);
@@ -755,7 +501,6 @@ function proyectosFiltrados() {
             );
 
         }
-
     );
 
 }
@@ -763,13 +508,12 @@ function proyectosFiltrados() {
 
 
 // ======================================================
-// MOSTRAR PROYECTOS
+// TABLA PRINCIPAL
 // ======================================================
 
 function mostrarProyectos() {
 
-    cuerpoTabla.innerHTML =
-        "";
+    cuerpoTabla.innerHTML = "";
 
 
     const lista =
@@ -785,11 +529,10 @@ function mostrarProyectos() {
             <tr>
 
                 <td
-                    colspan="15"
+                    colspan="14"
                     style="
                         text-align:center;
                         padding:30px;
-                        color:#777;
                     "
                 >
 
@@ -811,7 +554,6 @@ function mostrarProyectos() {
 
 
     lista.forEach(
-
         function(proyecto) {
 
 
@@ -823,51 +565,35 @@ function mostrarProyectos() {
 
             fila.innerHTML = `
 
-
                 <td>
-
                     ${escaparHTML(
                         proyecto.oportunidad
                     )}
-
                 </td>
 
-
                 <td>
-
                     ${escaparHTML(
                         proyecto.tipoProyecto
                     )}
-
                 </td>
 
-
                 <td>
-
                     ${formatearFecha(
                         proyecto.fechaSolicitud
                     )}
-
                 </td>
 
-
                 <td>
-
                     ${escaparHTML(
                         proyecto.vendedor
                     )}
-
                 </td>
 
-
                 <td>
-
                     ${formatearFecha(
                         proyecto.fechaCotizacion
                     )}
-
                 </td>
-
 
                 <td>
 
@@ -888,42 +614,29 @@ function mostrarProyectos() {
 
                 </td>
 
-
                 <td>
-
                     ${formatearFecha(
                         proyecto.fechaGanado
                     )}
-
                 </td>
-
 
                 <td>
 
-                    ${formatearDinero(
+                    USD $
+
+                    ${formatearNumero(
                         proyecto.precioVenta
                     )}
 
                 </td>
 
-
-                <td>
-
-                    ${escaparHTML(
-                        proyecto.monedaVenta
-                    )}
-
-                </td>
-
-
                 <td class="confidencial">
 
-                    ${formatearDinero(
+                    ${formatearNumero(
                         proyecto.precioContratista
                     )}
 
                 </td>
-
 
                 <td class="confidencial">
 
@@ -933,7 +646,6 @@ function mostrarProyectos() {
 
                 </td>
 
-
                 <td class="confidencial">
 
                     ${escaparHTML(
@@ -942,7 +654,6 @@ function mostrarProyectos() {
 
                 </td>
 
-
                 <td>
 
                     ${escaparHTML(
@@ -950,7 +661,6 @@ function mostrarProyectos() {
                     )}
 
                 </td>
-
 
                 <td class="confidencial">
 
@@ -967,7 +677,6 @@ function mostrarProyectos() {
                     }
 
                 </td>
-
 
                 <td class="acciones-tabla">
 
@@ -1000,7 +709,6 @@ function mostrarProyectos() {
 
                 </td>
 
-
             `;
 
 
@@ -1009,7 +717,6 @@ function mostrarProyectos() {
             );
 
         }
-
     );
 
 
@@ -1020,16 +727,12 @@ function mostrarProyectos() {
 
 
 // ======================================================
-// LIMPIAR FORMULARIO
+// LIMPIAR
 // ======================================================
 
 function limpiarFormulario() {
 
     formulario.reset();
-
-
-    monedaVenta.value =
-        "MXN";
 
 
     monedaContratista.value =
@@ -1063,35 +766,21 @@ function limpiarFormulario() {
 }
 
 
-
-// ======================================================
-// BOTÓN LIMPIAR
-// ======================================================
-
 document.getElementById(
     "btnLimpiar"
 )
 .addEventListener(
-
     "click",
-
     limpiarFormulario
-
 );
 
 
-
-// ======================================================
-// BOTÓN NUEVO
-// ======================================================
 
 document.getElementById(
     "btnNuevo"
 )
 .addEventListener(
-
     "click",
-
     function() {
 
 
@@ -1102,47 +791,32 @@ document.getElementById(
             "seccionFormulario"
         )
         .scrollIntoView(
-
             {
-
                 behavior:
                     "smooth"
-
             }
-
         );
 
     }
-
 );
 
 
 
 // ======================================================
-// EDITAR PROYECTO
+// EDITAR
 // ======================================================
 
 function editarProyecto(id) {
 
     const proyecto =
         proyectos.find(
-
-            function(item) {
-
-                return (
-                    item.id ===
-                    id
-                );
-
-            }
-
+            item =>
+                item.id === id
         );
 
 
     if (!proyecto) {
-
         return;
-
     }
 
 
@@ -1151,87 +825,55 @@ function editarProyecto(id) {
 
 
     oportunidad.value =
-        proyecto.oportunidad
-        ||
-        "";
+        proyecto.oportunidad || "";
 
 
     tipoProyecto.value =
-        proyecto.tipoProyecto
-        ||
-        "";
+        proyecto.tipoProyecto || "";
 
 
     fechaSolicitud.value =
-        proyecto.fechaSolicitud
-        ||
-        "";
+        proyecto.fechaSolicitud || "";
 
 
     vendedor.value =
-        proyecto.vendedor
-        ||
-        "";
+        proyecto.vendedor || "";
 
 
     fechaCotizacion.value =
-        proyecto.fechaCotizacion
-        ||
-        "";
+        proyecto.fechaCotizacion || "";
 
 
     estatus.value =
-        proyecto.estatus
-        ||
-        "";
+        proyecto.estatus || "";
 
 
     fechaGanado.value =
-        proyecto.fechaGanado
-        ||
-        "";
+        proyecto.fechaGanado || "";
 
 
     precioVenta.value =
-        proyecto.precioVenta
-        ||
-        "";
-
-
-    monedaVenta.value =
-        proyecto.monedaVenta
-        ||
-        "MXN";
+        proyecto.precioVenta || "";
 
 
     precioContratista.value =
-        proyecto.precioContratista
-        ||
-        "";
+        proyecto.precioContratista || "";
 
 
     monedaContratista.value =
-        proyecto.monedaContratista
-        ||
-        "MXN";
+        proyecto.monedaContratista || "MXN";
 
 
     contratista.value =
-        proyecto.contratista
-        ||
-        "";
+        proyecto.contratista || "";
 
 
     tipoCambio.value =
-        proyecto.tipoCambio
-        ||
-        "";
+        proyecto.tipoCambio || "";
 
 
     margen.value =
-        proyecto.margen
-        ||
-        "";
+        proyecto.margen || "";
 
 
     actualizarCampoGanado();
@@ -1258,9 +900,7 @@ function editarProyecto(id) {
         +
 
         (
-            proyecto.oportunidad
-            ||
-            ""
+            proyecto.oportunidad || ""
         );
 
 
@@ -1268,14 +908,10 @@ function editarProyecto(id) {
         "seccionFormulario"
     )
     .scrollIntoView(
-
         {
-
             behavior:
                 "smooth"
-
         }
-
     );
 
 }
@@ -1290,103 +926,64 @@ document.getElementById(
     "btnEditar"
 )
 .addEventListener(
-
     "click",
-
     function() {
-
-
-        if (
-            proyectoEditando ===
-            null
-        ) {
-
-            return;
-
-        }
 
 
         const indice =
             proyectos.findIndex(
-
-                function(item) {
-
-                    return (
-                        item.id ===
-                        proyectoEditando
-                    );
-
-                }
-
+                item =>
+                    item.id ===
+                    proyectoEditando
             );
 
 
         if (
             indice === -1
         ) {
-
             return;
-
         }
 
 
         proyectos[indice] = {
 
-
             ...proyectos[indice],
-
 
             oportunidad:
                 oportunidad.value.trim(),
 
-
             tipoProyecto:
                 tipoProyecto.value,
-
 
             fechaSolicitud:
                 fechaSolicitud.value,
 
-
             vendedor:
                 vendedor.value.trim(),
-
 
             fechaCotizacion:
                 fechaCotizacion.value,
 
-
             estatus:
                 estatus.value,
-
 
             fechaGanado:
                 fechaGanado.value,
 
-
             precioVenta:
                 precioVenta.value,
-
-
-            monedaVenta:
-                monedaVenta.value,
-
 
             precioContratista:
                 precioContratista.value,
 
-
             monedaContratista:
                 monedaContratista.value,
-
 
             contratista:
                 contratista.value.trim(),
 
-
             tipoCambio:
                 tipoCambio.value,
-
 
             margen:
                 margen.value
@@ -1403,24 +1000,21 @@ document.getElementById(
         actualizarSistema();
 
     }
-
 );
 
 
 
 // ======================================================
-// ELIMINAR PROYECTO
+// ELIMINAR
 // ======================================================
 
 function eliminarProyecto(id) {
 
-    const confirmar =
-        confirm(
+    if (
+        !confirm(
             "¿Seguro que quieres eliminar este proyecto?"
-        );
-
-
-    if (!confirmar) {
+        )
+    ) {
 
         return;
 
@@ -1429,16 +1023,8 @@ function eliminarProyecto(id) {
 
     proyectos =
         proyectos.filter(
-
-            function(item) {
-
-                return (
-                    item.id !==
-                    id
-                );
-
-            }
-
+            item =>
+                item.id !== id
         );
 
 
@@ -1457,45 +1043,37 @@ function eliminarProyecto(id) {
 
 function actualizarContador() {
 
-    const contador =
-        document.getElementById(
-            "contadorProyectos"
+    document.getElementById(
+        "contadorProyectos"
+    ).textContent =
+
+        proyectos.length
+
+        +
+
+        (
+            proyectos.length === 1
+
+            ?
+
+            " proyecto registrado"
+
+            :
+
+            " proyectos registrados"
         );
-
-
-    if (
-        proyectos.length ===
-        1
-    ) {
-
-        contador.textContent =
-            "1 proyecto registrado";
-
-    }
-
-    else {
-
-        contador.textContent =
-
-            proyectos.length
-
-            +
-
-            " proyectos registrados";
-
-    }
 
 }
 
 
 
 // ======================================================
-// FILTRO DE VENDEDORES
+// VENDEDORES DEL FILTRO
 // ======================================================
 
 function actualizarFiltroVendedores() {
 
-    const vendedorActual =
+    const actual =
         filtroVendedor.value;
 
 
@@ -1506,19 +1084,10 @@ function actualizarFiltroVendedores() {
             proyectos
 
             .map(
-
-                function(proyecto) {
-
-                    return (
-
-                        proyecto.vendedor
-                        ||
-                        ""
-
-                    ).trim();
-
-                }
-
+                p =>
+                    (
+                        p.vendedor || ""
+                    ).trim()
             )
 
             .filter(Boolean)
@@ -1534,41 +1103,39 @@ function actualizarFiltroVendedores() {
 
 
     vendedores.forEach(
-
         function(nombre) {
 
 
-            const option =
+            const opcion =
                 document.createElement(
                     "option"
                 );
 
 
-            option.value =
+            opcion.value =
                 nombre;
 
 
-            option.textContent =
+            opcion.textContent =
                 nombre;
 
 
             filtroVendedor.appendChild(
-                option
+                opcion
             );
 
         }
-
     );
 
 
     if (
         vendedores.includes(
-            vendedorActual
+            actual
         )
     ) {
 
         filtroVendedor.value =
-            vendedorActual;
+            actual;
 
     }
 
@@ -1577,57 +1144,38 @@ function actualizarFiltroVendedores() {
 
 
 // ======================================================
-// EVENTOS FILTROS
+// EVENTOS DE FILTROS
 // ======================================================
 
 buscar.addEventListener(
-
     "input",
-
     mostrarProyectos
-
 );
 
 
 filtroTipo.addEventListener(
-
     "change",
-
     mostrarProyectos
-
 );
 
 
 filtroEstatus.addEventListener(
-
     "change",
-
     mostrarProyectos
-
 );
 
 
 filtroVendedor.addEventListener(
-
     "change",
-
     mostrarProyectos
-
 );
 
-
-
-// ======================================================
-// LIMPIAR FILTROS
-// ======================================================
 
 document.getElementById(
     "btnLimpiarFiltros"
 )
 .addEventListener(
-
     "click",
-
     function() {
 
 
@@ -1650,7 +1198,6 @@ document.getElementById(
         mostrarProyectos();
 
     }
-
 );
 
 
@@ -1686,22 +1233,23 @@ function datosFechaActual() {
     const prefijoMes =
 
         anio
+
         +
+
         "-"
+
         +
+
         mesNumero;
 
 
     const ultimoDia =
         new Date(
-
             anio,
-
             mes + 1,
-
             0
-
-        ).getDate();
+        )
+        .getDate();
 
 
     return {
@@ -1736,58 +1284,41 @@ function actualizarKPIs() {
 
     const cotizacionesMes =
         proyectos.filter(
+            proyecto =>
 
-            function(proyecto) {
+                proyecto.fechaCotizacion
 
-                return (
+                &&
 
-                    proyecto.fechaCotizacion
-
-                    &&
-
-                    proyecto.fechaCotizacion
+                proyecto.fechaCotizacion
                     .startsWith(
                         fecha.prefijoMes
                     )
-
-                );
-
-            }
-
         );
 
 
     const ganadosMes =
         proyectos.filter(
+            proyecto =>
 
-            function(proyecto) {
+                proyecto.estatus ===
+                "Ganado"
 
-                return (
+                &&
 
-                    proyecto.estatus ===
-                    "Ganado"
+                proyecto.fechaGanado
 
-                    &&
+                &&
 
-                    proyecto.fechaGanado
-
-                    &&
-
-                    proyecto.fechaGanado
+                proyecto.fechaGanado
                     .startsWith(
                         fecha.prefijoMes
                     )
-
-                );
-
-            }
-
         );
 
 
     const montoCotizado =
         cotizacionesMes.reduce(
-
             function(total, proyecto) {
 
                 return (
@@ -1796,22 +1327,23 @@ function actualizarKPIs() {
 
                     +
 
-                    precioVentaMXN(
-                        proyecto
+                    (
+                        Number(
+                            proyecto.precioVenta
+                        )
+                        ||
+                        0
                     )
 
                 );
 
             },
-
             0
-
         );
 
 
     const montoVendido =
         ganadosMes.reduce(
-
             function(total, proyecto) {
 
                 return (
@@ -1820,16 +1352,18 @@ function actualizarKPIs() {
 
                     +
 
-                    precioVentaMXN(
-                        proyecto
+                    (
+                        Number(
+                            proyecto.precioVenta
+                        )
+                        ||
+                        0
                     )
 
                 );
 
             },
-
             0
-
         );
 
 
@@ -1859,7 +1393,7 @@ function actualizarKPIs() {
     document.getElementById(
         "kpiCotizado"
     ).textContent =
-        formatearMXN(
+        formatearUSD(
             montoCotizado
         );
 
@@ -1867,7 +1401,7 @@ function actualizarKPIs() {
     document.getElementById(
         "kpiVendido"
     ).textContent =
-        formatearMXN(
+        formatearUSD(
             montoVendido
         );
 
@@ -1883,16 +1417,11 @@ function actualizarKPIs() {
     ).textContent =
 
         conversion.toLocaleString(
-
             "es-MX",
-
             {
-
                 maximumFractionDigits:
                     1
-
             }
-
         )
 
         +
@@ -1901,21 +1430,17 @@ function actualizarKPIs() {
 
 
     const nombreMes =
-        fecha.hoy.toLocaleDateString(
+        fecha.hoy
+            .toLocaleDateString(
+                "es-MX",
+                {
+                    month:
+                        "long",
 
-            "es-MX",
-
-            {
-
-                month:
-                    "long",
-
-                year:
-                    "numeric"
-
-            }
-
-        );
+                    year:
+                        "numeric"
+                }
+            );
 
 
     document.getElementById(
@@ -1942,48 +1467,6 @@ function actualizarKPIs() {
 
         nombreMes;
 
-
-    const sinTC =
-        proyectos.filter(
-            requiereTipoCambio
-        );
-
-
-    const nota =
-        document.getElementById(
-            "notaTipoCambio"
-        );
-
-
-    if (
-        sinTC.length > 0
-    ) {
-
-        nota.textContent =
-
-            "Nota: existen "
-
-            +
-
-            sinTC.length
-
-            +
-
-            " proyecto(s) en USD sin tipo de cambio. "
-
-            +
-
-            "Esos importes no se incluyen en los totales en MXN.";
-
-    }
-
-    else {
-
-        nota.textContent =
-            "";
-
-    }
-
 }
 
 
@@ -2000,16 +1483,15 @@ function obtenerDatosMensuales() {
 
     const montos =
         new Array(12)
-        .fill(0);
+            .fill(0);
 
 
     const cantidades =
         new Array(12)
-        .fill(0);
+            .fill(0);
 
 
     proyectos.forEach(
-
         function(proyecto) {
 
 
@@ -2022,20 +1504,20 @@ function obtenerDatosMensuales() {
             }
 
 
-            const fechaProyecto =
+            const partes =
                 proyecto.fechaCotizacion
-                .split("-");
+                    .split("-");
 
 
             const anio =
                 Number(
-                    fechaProyecto[0]
+                    partes[0]
                 );
 
 
             const mes =
                 Number(
-                    fechaProyecto[1]
+                    partes[1]
                 )
                 -
                 1;
@@ -2051,27 +1533,21 @@ function obtenerDatosMensuales() {
             }
 
 
-            if (
-                mes < 0
+            const importe =
+                Number(
+                    proyecto.precioVenta
+                )
                 ||
-                mes > 11
-            ) {
-
-                return;
-
-            }
+                0;
 
 
             cantidades[mes]++;
 
 
             montos[mes] +=
-                precioVentaMXN(
-                    proyecto
-                );
+                importe;
 
         }
-
     );
 
 
@@ -2091,7 +1567,7 @@ function obtenerDatosMensuales() {
 
 
 // ======================================================
-// CREAR GRÁFICA
+// CREAR GRÁFICAS
 // ======================================================
 
 function crearGrafica(
@@ -2117,27 +1593,16 @@ function crearGrafica(
     const meses = [
 
         "Ene",
-
         "Feb",
-
         "Mar",
-
         "Abr",
-
         "May",
-
         "Jun",
-
         "Jul",
-
         "Ago",
-
         "Sep",
-
         "Oct",
-
         "Nov",
-
         "Dic"
 
     ];
@@ -2145,16 +1610,12 @@ function crearGrafica(
 
     const maximo =
         Math.max(
-
             ...valores,
-
             1
-
         );
 
 
     valores.forEach(
-
         function(valor, indice) {
 
 
@@ -2181,39 +1642,36 @@ function crearGrafica(
             if (
                 tipo ===
                 "dinero"
+
+                &&
+
+                valor > 0
             ) {
 
                 etiqueta.textContent =
 
-                    valor > 0
+                    "USD $"
 
-                    ?
-
-                    "$"
                     +
+
                     numeroCompacto(
                         valor
-                    )
-
-                    :
-
-                    "";
+                    );
 
             }
 
-            else {
+
+            else if (
+                tipo ===
+                "cantidad"
+
+                &&
+
+                valor > 0
+            ) {
 
                 etiqueta.textContent =
-
-                    valor > 0
-
-                    ?
-
-                    valor
-
-                    :
-
-                    "";
+                    valor;
 
             }
 
@@ -2238,19 +1696,6 @@ function crearGrafica(
                 "barra";
 
 
-            const porcentaje =
-
-                (
-                    valor
-                    /
-                    maximo
-                )
-
-                *
-
-                100;
-
-
             barra.style.height =
 
                 valor > 0
@@ -2258,58 +1703,25 @@ function crearGrafica(
                 ?
 
                 Math.max(
-                    porcentaje,
+                    (
+                        valor /
+                        maximo
+                    )
+
+                    *
+
+                    100,
+
                     4
                 )
 
                 +
+
                 "%"
 
                 :
 
                 "2px";
-
-
-            if (
-                tipo ===
-                "dinero"
-            ) {
-
-                barra.title =
-
-                    meses[indice]
-
-                    +
-
-                    ": "
-
-                    +
-
-                    formatearMXN(
-                        valor
-                    );
-
-            }
-
-            else {
-
-                barra.title =
-
-                    meses[indice]
-
-                    +
-
-                    ": "
-
-                    +
-
-                    valor
-
-                    +
-
-                    " cotizaciones";
-
-            }
 
 
             const mes =
@@ -2346,7 +1758,6 @@ function crearGrafica(
             );
 
         }
-
     );
 
 }
@@ -2354,7 +1765,7 @@ function crearGrafica(
 
 
 // ======================================================
-// ACTUALIZAR GRÁFICAS MENSUALES
+// ACTUALIZAR GRÁFICAS
 // ======================================================
 
 function actualizarGraficas() {
@@ -2389,7 +1800,7 @@ function actualizarGraficas() {
         "tituloGraficaMonto"
     ).textContent =
 
-        "Monto de venta enviado a Ventas — "
+        "Precio final enviado a Ventas en USD — "
 
         +
 
@@ -2411,7 +1822,7 @@ function actualizarGraficas() {
 
 
 // ======================================================
-// RESUMEN POR VENDEDOR
+// RESUMEN VENDEDORES
 // ======================================================
 
 function obtenerResumenVendedores() {
@@ -2424,15 +1835,12 @@ function obtenerResumenVendedores() {
 
 
     proyectos.forEach(
-
         function(proyecto) {
 
 
             const nombre =
                 (
-                    proyecto.vendedor
-                    ||
-                    ""
+                    proyecto.vendedor || ""
                 )
                 .trim();
 
@@ -2470,24 +1878,26 @@ function obtenerResumenVendedores() {
             }
 
 
+            const importe =
+                Number(
+                    proyecto.precioVenta
+                )
+                ||
+                0;
 
-            // --------------------------------------------
-            // COTIZADO
-            // --------------------------------------------
+
 
             if (
-
                 proyecto.fechaCotizacion
 
                 &&
 
                 proyecto.fechaCotizacion
-                .startsWith(
-                    fecha.anio
-                    +
-                    "-"
-                )
-
+                    .startsWith(
+                        fecha.anio
+                        +
+                        "-"
+                    )
             ) {
 
                 resumen[nombre]
@@ -2496,20 +1906,13 @@ function obtenerResumenVendedores() {
 
                 resumen[nombre]
                     .montoCotizado +=
-                    precioVentaMXN(
-                        proyecto
-                    );
+                    importe;
 
             }
 
 
 
-            // --------------------------------------------
-            // VENDIDO
-            // --------------------------------------------
-
             if (
-
                 proyecto.estatus ===
                 "Ganado"
 
@@ -2520,12 +1923,11 @@ function obtenerResumenVendedores() {
                 &&
 
                 proyecto.fechaGanado
-                .startsWith(
-                    fecha.anio
-                    +
-                    "-"
-                )
-
+                    .startsWith(
+                        fecha.anio
+                        +
+                        "-"
+                    )
             ) {
 
                 resumen[nombre]
@@ -2534,14 +1936,11 @@ function obtenerResumenVendedores() {
 
                 resumen[nombre]
                     .montoVendido +=
-                    precioVentaMXN(
-                        proyecto
-                    );
+                    importe;
 
             }
 
         }
-
     );
 
 
@@ -2549,7 +1948,6 @@ function obtenerResumenVendedores() {
         resumen
     )
     .sort(
-
         function(a, b) {
 
             return (
@@ -2563,7 +1961,6 @@ function obtenerResumenVendedores() {
             );
 
         }
-
     );
 
 }
@@ -2606,7 +2003,7 @@ function actualizarGraficaVendedores() {
 
         +
 
-        " — valores en MXN equivalente";
+        " — montos de venta expresados en USD";
 
 
     if (
@@ -2615,9 +2012,15 @@ function actualizarGraficaVendedores() {
 
         contenedor.innerHTML = `
 
-            <div class="sin-datos-vendedor">
+            <div
+                style="
+                    text-align:center;
+                    padding:30px;
+                    color:#68727d;
+                "
+            >
 
-                No existen datos de vendedores
+                No existen datos
                 para mostrar.
 
             </div>
@@ -2630,12 +2033,12 @@ function actualizarGraficaVendedores() {
     }
 
 
+
     let maximo =
         1;
 
 
     resumen.forEach(
-
         function(item) {
 
             maximo =
@@ -2650,12 +2053,11 @@ function actualizarGraficaVendedores() {
                 );
 
         }
-
     );
 
 
-    resumen.forEach(
 
+    resumen.forEach(
         function(item) {
 
 
@@ -2697,7 +2099,6 @@ function actualizarGraficaVendedores() {
 
             fila.innerHTML = `
 
-
                 <div
                     class="vendedor-grafica-nombre"
                 >
@@ -2709,15 +2110,12 @@ function actualizarGraficaVendedores() {
                 </div>
 
 
-
                 <div class="vendedor-barras">
-
 
 
                     <div
                         class="vendedor-barra-linea"
                     >
-
 
                         <div
                             class="vendedor-barra-etiqueta"
@@ -2726,7 +2124,6 @@ function actualizarGraficaVendedores() {
                             Cotizado
 
                         </div>
-
 
 
                         <div
@@ -2745,17 +2142,15 @@ function actualizarGraficaVendedores() {
                         </div>
 
 
-
                         <div
                             class="vendedor-barra-valor"
                         >
 
-                            ${formatearMXN(
+                            ${formatearUSD(
                                 item.montoCotizado
                             )}
 
                         </div>
-
 
                     </div>
 
@@ -2765,7 +2160,6 @@ function actualizarGraficaVendedores() {
                         class="vendedor-barra-linea"
                     >
 
-
                         <div
                             class="vendedor-barra-etiqueta"
                         >
@@ -2773,7 +2167,6 @@ function actualizarGraficaVendedores() {
                             Vendido
 
                         </div>
-
 
 
                         <div
@@ -2792,23 +2185,20 @@ function actualizarGraficaVendedores() {
                         </div>
 
 
-
                         <div
                             class="vendedor-barra-valor"
                         >
 
-                            ${formatearMXN(
+                            ${formatearUSD(
                                 item.montoVendido
                             )}
 
                         </div>
 
-
                     </div>
 
 
                 </div>
-
 
             `;
 
@@ -2818,7 +2208,6 @@ function actualizarGraficaVendedores() {
             );
 
         }
-
     );
 
 }
@@ -2862,11 +2251,11 @@ function actualizarTablaVendedores() {
                     style="
                         text-align:center;
                         padding:25px;
-                        color:#777;
                     "
                 >
 
-                    No existen datos para mostrar.
+                    No existen datos
+                    para mostrar.
 
                 </td>
 
@@ -2877,8 +2266,8 @@ function actualizarTablaVendedores() {
     }
 
 
-    resumen.forEach(
 
+    resumen.forEach(
         function(item) {
 
 
@@ -2913,7 +2302,6 @@ function actualizarTablaVendedores() {
 
             fila.innerHTML = `
 
-
                 <td>
 
                     ${escaparHTML(
@@ -2922,22 +2310,19 @@ function actualizarTablaVendedores() {
 
                 </td>
 
-
                 <td>
 
                     ${item.cotizaciones}
 
                 </td>
 
-
                 <td>
 
-                    ${formatearMXN(
+                    ${formatearUSD(
                         item.montoCotizado
                     )}
 
                 </td>
-
 
                 <td>
 
@@ -2945,35 +2330,28 @@ function actualizarTablaVendedores() {
 
                 </td>
 
-
                 <td>
 
-                    ${formatearMXN(
+                    ${formatearUSD(
                         item.montoVendido
                     )}
 
                 </td>
 
-
                 <td>
 
                     ${
-                        conversion.toLocaleString(
-
+                        conversion
+                        .toLocaleString(
                             "es-MX",
-
                             {
-
                                 maximumFractionDigits:
                                     1
-
                             }
-
                         )
                     }%
 
                 </td>
-
 
             `;
 
@@ -2983,7 +2361,6 @@ function actualizarTablaVendedores() {
             );
 
         }
-
     );
 
 
@@ -2999,14 +2376,14 @@ function actualizarTablaVendedores() {
 
         +
 
-        " — montos expresados en MXN equivalente";
+        " — montos expresados en USD";
 
 }
 
 
 
 // ======================================================
-// MODAL REPORTE
+// REPORTE
 // ======================================================
 
 const modalReporte =
@@ -3019,16 +2396,13 @@ document.getElementById(
     "btnReporte"
 )
 .addEventListener(
-
     "click",
-
     function() {
 
         modalReporte.style.display =
             "flex";
 
     }
-
 );
 
 
@@ -3036,28 +2410,20 @@ document.getElementById(
     "btnCerrarModal"
 )
 .addEventListener(
-
     "click",
-
     function() {
 
         modalReporte.style.display =
             "none";
 
     }
-
 );
 
 
 
-// ======================================================
-// DESCRIPCIÓN FILTROS
-// ======================================================
-
 function descripcionFiltros() {
 
-    const filtros =
-        [];
+    const filtros = [];
 
 
     if (
@@ -3065,13 +2431,9 @@ function descripcionFiltros() {
     ) {
 
         filtros.push(
-
             "Tipo: "
-
             +
-
             filtroTipo.value
-
         );
 
     }
@@ -3082,13 +2444,9 @@ function descripcionFiltros() {
     ) {
 
         filtros.push(
-
             "Estatus: "
-
             +
-
             filtroEstatus.value
-
         );
 
     }
@@ -3099,13 +2457,9 @@ function descripcionFiltros() {
     ) {
 
         filtros.push(
-
             "Vendedor: "
-
             +
-
             filtroVendedor.value
-
         );
 
     }
@@ -3116,39 +2470,33 @@ function descripcionFiltros() {
     ) {
 
         filtros.push(
-
             "Búsqueda: "
-
             +
-
             buscar.value.trim()
-
         );
 
     }
 
 
-    if (
-        filtros.length ===
-        0
-    ) {
+    return (
 
-        return "Todos los proyectos";
+        filtros.length > 0
 
-    }
+        ?
 
+        filtros.join(
+            " | "
+        )
 
-    return filtros.join(
-        " | "
+        :
+
+        "Todos los proyectos"
+
     );
 
 }
 
 
-
-// ======================================================
-// PREPARAR IMPRESIÓN
-// ======================================================
 
 function prepararImpresion(tipo) {
 
@@ -3156,19 +2504,9 @@ function prepararImpresion(tipo) {
         "none";
 
 
-    const ahora =
-        new Date();
-
-
     const titulo =
         document.getElementById(
             "tituloReporte"
-        );
-
-
-    const datos =
-        document.getElementById(
-            "datosReporte"
         );
 
 
@@ -3200,15 +2538,18 @@ function prepararImpresion(tipo) {
     }
 
 
-    datos.textContent =
+    document.getElementById(
+        "datosReporte"
+    ).textContent =
 
         "Generado: "
 
         +
 
-        ahora.toLocaleString(
-            "es-MX"
-        )
+        new Date()
+            .toLocaleString(
+                "es-MX"
+            )
 
         +
 
@@ -3220,32 +2561,23 @@ function prepararImpresion(tipo) {
 
 
     setTimeout(
-
         function() {
 
             window.print();
 
         },
-
         150
-
     );
 
 }
 
 
 
-// ======================================================
-// REPORTE VENTAS
-// ======================================================
-
 document.getElementById(
     "btnReporteVentas"
 )
 .addEventListener(
-
     "click",
-
     function() {
 
         prepararImpresion(
@@ -3253,22 +2585,15 @@ document.getElementById(
         );
 
     }
-
 );
 
 
-
-// ======================================================
-// REPORTE PROYECTOS
-// ======================================================
 
 document.getElementById(
     "btnReporteProyectos"
 )
 .addEventListener(
-
     "click",
-
     function() {
 
         prepararImpresion(
@@ -3276,19 +2601,12 @@ document.getElementById(
         );
 
     }
-
 );
 
 
 
-// ======================================================
-// DESPUÉS DE IMPRIMIR
-// ======================================================
-
 window.addEventListener(
-
     "afterprint",
-
     function() {
 
         document.body.classList.remove(
@@ -3296,13 +2614,12 @@ window.addEventListener(
         );
 
     }
-
 );
 
 
 
 // ======================================================
-// ACTUALIZAR SISTEMA COMPLETO
+// ACTUALIZAR TODO
 // ======================================================
 
 function actualizarSistema() {
@@ -3324,7 +2641,7 @@ function actualizarSistema() {
 
 
 // ======================================================
-// INICIAR SISTEMA
+// INICIO
 // ======================================================
 
 actualizarCampoGanado();
