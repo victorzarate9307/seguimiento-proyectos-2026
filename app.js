@@ -28,6 +28,12 @@ const oportunidad =
     );
 
 
+const cliente =
+    document.getElementById(
+        "cliente"
+    );
+
+
 const tipoProyecto =
     document.getElementById(
         "tipoProyecto"
@@ -61,6 +67,12 @@ const estatus =
 const fechaGanado =
     document.getElementById(
         "fechaGanado"
+    );
+
+
+const motivoPerdida =
+    document.getElementById(
+        "motivoPerdida"
     );
 
 
@@ -245,40 +257,35 @@ function formatearFecha(fecha) {
 function claseEstatus(estado) {
 
     if (
-        estado ===
-        "Abierto"
+        estado === "Abierto"
     ) {
         return "estatus-abierto";
     }
 
 
     if (
-        estado ===
-        "En cotización"
+        estado === "En cotización"
     ) {
         return "estatus-cotizacion";
     }
 
 
     if (
-        estado ===
-        "Ganado"
+        estado === "Ganado"
     ) {
         return "estatus-ganado";
     }
 
 
     if (
-        estado ===
-        "Cerrado"
+        estado === "Cerrado"
     ) {
         return "estatus-cerrado";
     }
 
 
     if (
-        estado ===
-        "Perdido"
+        estado === "Perdido"
     ) {
         return "estatus-perdido";
     }
@@ -291,33 +298,66 @@ function claseEstatus(estado) {
 
 
 // ======================================================
-// FECHA GANADO
+// CAMPOS CONDICIONALES SEGÚN ESTATUS
 // ======================================================
 
-function actualizarCampoGanado() {
+function actualizarCamposEstatus() {
 
-    const contenedor =
+    const contenedorFechaGanado =
         document.getElementById(
             "contenedorFechaGanado"
         );
 
 
+    const contenedorMotivoPerdida =
+        document.getElementById(
+            "contenedorMotivoPerdida"
+        );
+
+
+    // GANADO
+
     if (
-        estatus.value ===
-        "Ganado"
+        estatus.value === "Ganado"
     ) {
 
-        contenedor.classList.remove(
-            "oculto"
-        );
+        contenedorFechaGanado
+            .classList.remove(
+                "oculto"
+            );
 
     }
 
     else {
 
-        contenedor.classList.add(
-            "oculto"
-        );
+        contenedorFechaGanado
+            .classList.add(
+                "oculto"
+            );
+
+    }
+
+
+
+    // PERDIDO
+
+    if (
+        estatus.value === "Perdido"
+    ) {
+
+        contenedorMotivoPerdida
+            .classList.remove(
+                "oculto"
+            );
+
+    }
+
+    else {
+
+        contenedorMotivoPerdida
+            .classList.add(
+                "oculto"
+            );
 
     }
 
@@ -326,7 +366,7 @@ function actualizarCampoGanado() {
 
 estatus.addEventListener(
     "change",
-    actualizarCampoGanado
+    actualizarCamposEstatus
 );
 
 
@@ -350,6 +390,9 @@ formulario.addEventListener(
             oportunidad:
                 oportunidad.value.trim(),
 
+            cliente:
+                cliente.value.trim(),
+
             tipoProyecto:
                 tipoProyecto.value,
 
@@ -366,7 +409,28 @@ formulario.addEventListener(
                 estatus.value,
 
             fechaGanado:
-                fechaGanado.value,
+
+                estatus.value === "Ganado"
+
+                ?
+
+                fechaGanado.value
+
+                :
+
+                "",
+
+            motivoPerdida:
+
+                estatus.value === "Perdido"
+
+                ?
+
+                motivoPerdida.value
+
+                :
+
+                "",
 
             precioVenta:
                 precioVenta.value,
@@ -427,6 +491,14 @@ function proyectosFiltrados() {
 
                 (
                     proyecto.oportunidad || ""
+                )
+                .toLowerCase()
+                .includes(texto)
+
+                ||
+
+                (
+                    proyecto.cliente || ""
                 )
                 .toLowerCase()
                 .includes(texto)
@@ -529,7 +601,7 @@ function mostrarProyectos() {
             <tr>
 
                 <td
-                    colspan="14"
+                    colspan="16"
                     style="
                         text-align:center;
                         padding:30px;
@@ -568,6 +640,12 @@ function mostrarProyectos() {
                 <td>
                     ${escaparHTML(
                         proyecto.oportunidad
+                    )}
+                </td>
+
+                <td>
+                    ${escaparHTML(
+                        proyecto.cliente
                     )}
                 </td>
 
@@ -617,6 +695,12 @@ function mostrarProyectos() {
                 <td>
                     ${formatearFecha(
                         proyecto.fechaGanado
+                    )}
+                </td>
+
+                <td>
+                    ${escaparHTML(
+                        proyecto.motivoPerdida
                     )}
                 </td>
 
@@ -761,7 +845,7 @@ function limpiarFormulario() {
         "Nuevo proyecto";
 
 
-    actualizarCampoGanado();
+    actualizarCamposEstatus();
 
 }
 
@@ -828,6 +912,10 @@ function editarProyecto(id) {
         proyecto.oportunidad || "";
 
 
+    cliente.value =
+        proyecto.cliente || "";
+
+
     tipoProyecto.value =
         proyecto.tipoProyecto || "";
 
@@ -850,6 +938,10 @@ function editarProyecto(id) {
 
     fechaGanado.value =
         proyecto.fechaGanado || "";
+
+
+    motivoPerdida.value =
+        proyecto.motivoPerdida || "";
 
 
     precioVenta.value =
@@ -876,7 +968,7 @@ function editarProyecto(id) {
         proyecto.margen || "";
 
 
-    actualizarCampoGanado();
+    actualizarCamposEstatus();
 
 
     document.getElementById(
@@ -952,6 +1044,9 @@ document.getElementById(
             oportunidad:
                 oportunidad.value.trim(),
 
+            cliente:
+                cliente.value.trim(),
+
             tipoProyecto:
                 tipoProyecto.value,
 
@@ -968,7 +1063,28 @@ document.getElementById(
                 estatus.value,
 
             fechaGanado:
-                fechaGanado.value,
+
+                estatus.value === "Ganado"
+
+                ?
+
+                fechaGanado.value
+
+                :
+
+                "",
+
+            motivoPerdida:
+
+                estatus.value === "Perdido"
+
+                ?
+
+                motivoPerdida.value
+
+                :
+
+                "",
 
             precioVenta:
                 precioVenta.value,
@@ -2511,8 +2627,7 @@ function prepararImpresion(tipo) {
 
 
     if (
-        tipo ===
-        "ventas"
+        tipo === "ventas"
     ) {
 
         document.body.classList.add(
@@ -2644,6 +2759,6 @@ function actualizarSistema() {
 // INICIO
 // ======================================================
 
-actualizarCampoGanado();
+actualizarCamposEstatus();
 
 actualizarSistema();

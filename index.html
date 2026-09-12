@@ -465,6 +465,24 @@
 
 
 
+                    <!-- NUEVO: CLIENTE -->
+
+                    <div class="campo">
+
+                        <label>
+                            Nombre del cliente
+                        </label>
+
+                        <input
+                            type="text"
+                            id="cliente"
+                            placeholder="Nombre de la empresa / cliente"
+                        >
+
+                    </div>
+
+
+
                     <div class="campo">
 
                         <label>
@@ -579,6 +597,8 @@
 
 
 
+                    <!-- SOLO GANADO -->
+
                     <div
                         class="campo oculto"
                         id="contenedorFechaGanado"
@@ -592,6 +612,61 @@
                             type="date"
                             id="fechaGanado"
                         >
+
+                    </div>
+
+
+
+                    <!-- NUEVO: SOLO PERDIDO -->
+
+                    <div
+                        class="campo oculto"
+                        id="contenedorMotivoPerdida"
+                    >
+
+                        <label>
+                            Motivo de pérdida
+                        </label>
+
+                        <select id="motivoPerdida">
+
+                            <option value="">
+                                Seleccionar motivo
+                            </option>
+
+                            <option value="Precio alto">
+                                Precio alto
+                            </option>
+
+                            <option value="Falta de información">
+                                Falta de información
+                            </option>
+
+                            <option value="Fuera del alcance">
+                                Fuera del alcance
+                            </option>
+
+                            <option value="Tiempo excesivo de cotización">
+                                Tiempo excesivo de cotización
+                            </option>
+
+                            <option value="Cliente canceló el proyecto">
+                                Cliente canceló el proyecto
+                            </option>
+
+                            <option value="Ganó la competencia">
+                                Ganó la competencia
+                            </option>
+
+                            <option value="Sin respuesta del cliente">
+                                Sin respuesta del cliente
+                            </option>
+
+                            <option value="Otro">
+                                Otro
+                            </option>
+
+                        </select>
 
                     </div>
 
@@ -807,7 +882,7 @@
                 <input
                     type="text"
                     id="buscar"
-                    placeholder="Buscar oportunidad, vendedor o contratista"
+                    placeholder="Buscar oportunidad, cliente, vendedor o contratista"
                 >
 
 
@@ -901,6 +976,10 @@
                             </th>
 
                             <th>
+                                Cliente
+                            </th>
+
+                            <th>
                                 Tipo
                             </th>
 
@@ -922,6 +1001,10 @@
 
                             <th>
                                 Fecha ganado
+                            </th>
+
+                            <th>
+                                Motivo pérdida
                             </th>
 
                             <th>
