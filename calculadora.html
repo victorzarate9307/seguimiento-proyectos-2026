@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Cotizaciones</title>
+    <link rel="stylesheet" href="calculadora.css">
+</head>
+<body>
+    <header class="encabezado">
+        <div class="encabezado-izquierda">
+            <div class="logo-contenedor">
+                <img src="assets/spirax-logo.png" alt="Spirax Sarco" class="logo-spirax">
+            </div>
+            <div>
+                <h1>Calculadora de Cotizaciones</h1>
+                <p>Cálculo interno de precio de venta en USD</p>
+            </div>
+        </div>
+        <a class="btn btn-claro" href="index.html">← Volver a Proyectos</a>
+    </header>
+
+    <main class="contenedor">
+        <section class="intro">
+            <div>
+                <span class="etiqueta">HERRAMIENTA INTERNA</span>
+                <h2>Calcular precio final para Ventas</h2>
+                <p>Captura el costo del contratista, moneda, margen y tipo de cambio. El resultado de venta siempre se presenta en dólares.</p>
+            </div>
+        </section>
+
+        <section class="grid-principal">
+            <div class="tarjeta formulario-card">
+                <div class="titulo-seccion">
+                    <h3>Datos de la cotización</h3>
+                    <p>El tipo de cambio solo afecta el cálculo cuando el contratista cotiza en MXN.</p>
+                </div>
+
+                <div class="form-grid">
+                    <div class="campo campo-ancho">
+                        <label for="precioContratista">Precio del contratista</label>
+                        <input type="number" id="precioContratista" min="0" step="0.01" placeholder="0.00">
+                    </div>
+
+                    <div class="campo">
+                        <label for="monedaContratista">Moneda del contratista</label>
+                        <select id="monedaContratista">
+                            <option value="MXN">MXN - Pesos mexicanos</option>
+                            <option value="USD">USD - Dólares</option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="margen">Margen requerido</label>
+                        <select id="margen">
+                            <option value="38">38%</option>
+                            <option value="40">40%</option>
+                            <option value="45">45%</option>
+                            <option value="50">50%</option>
+                        </select>
+                    </div>
+
+                    <div class="campo campo-ancho">
+                        <label for="tipoCambio">Tipo de cambio interno</label>
+                        <div class="input-con-sufijo">
+                            <input type="number" id="tipoCambio" min="0" step="0.0001" placeholder="Ej. 17.00">
+                            <span>MXN / USD</span>
+                        </div>
+                        <small id="ayudaTipoCambio">Necesario cuando el costo del contratista está en MXN.</small>
+                    </div>
+                </div>
+
+                <div id="mensajeError" class="mensaje-error oculto"></div>
+
+                <div class="acciones">
+                    <button type="button" id="btnLimpiar" class="btn btn-secundario">Limpiar</button>
+                    <button type="button" id="btnCalcular" class="btn btn-principal">Calcular cotización</button>
+                </div>
+            </div>
+
+            <div class="tarjeta resultados-card">
+                <div class="titulo-seccion">
+                    <h3>Resultado para Ventas</h3>
+                    <p>Todos los importes de esta sección están expresados en USD.</p>
+                </div>
+
+                <div class="resultado-destacado">
+                    <span>Precio final antes de impuestos</span>
+                    <strong id="resultadoSubtotal">USD $0.00</strong>
+                </div>
+
+                <div class="resultado-fila">
+                    <div>
+                        <span>IVA</span>
+                        <small>16%</small>
+                    </div>
+                    <strong id="resultadoIVA">USD $0.00</strong>
+                </div>
+
+                <div class="separador"></div>
+
+                <div class="resultado-total">
+                    <span>Total con IVA</span>
+                    <strong id="resultadoTotal">USD $0.00</strong>
+                </div>
+
+                <div class="detalle-calculo">
+                    <div>
+                        <span>Costo base equivalente</span>
+                        <strong id="costoBaseUSD">USD $0.00</strong>
+                    </div>
+                    <div>
+                        <span>Margen aplicado</span>
+                        <strong id="margenAplicado">38%</strong>
+                    </div>
+                </div>
+
+                <button type="button" id="btnCopiar" class="btn btn-copiar" disabled>Copiar resultado</button>
+            </div>
+        </section>
+
+        <section class="tarjeta formula-card">
+            <h3>Cómo se calcula</h3>
+            <div class="formula-grid">
+                <div>
+                    <span>1</span>
+                    <p>Si el costo está en MXN, primero se convierte a USD con el tipo de cambio interno.</p>
+                </div>
+                <div>
+                    <span>2</span>
+                    <p>El precio de venta se obtiene respetando el margen seleccionado: costo ÷ (1 − margen).</p>
+                </div>
+                <div>
+                    <span>3</span>
+                    <p>Se calcula el IVA del 16% y se suma al precio antes de impuestos.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="calculadora.js"></script>
+</body>
+</html>

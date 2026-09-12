@@ -1,883 +1,327 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seguimiento de Proyectos</title>
-
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
+    <link rel="stylesheet" href="style.css">
 </head>
-
 
 <body>
 
-
-    <!-- ================================================
-    ENCABEZADO
-    ================================================= -->
-
     <header class="encabezado">
-
         <div class="encabezado-izquierda">
-
             <div class="logo-contenedor">
-
-                <img
-                    src="assets/spirax-logo.png"
-                    alt="Spirax Sarco"
-                    class="logo-spirax"
-                >
-
+                <img src="assets/spirax-logo.png" alt="Spirax Sarco" class="logo-spirax">
             </div>
-
 
             <div class="titulo-principal">
-
-                <h1>
-                    Seguimiento de Proyectos
-                </h1>
-
-                <p>
-                    Control de oportunidades,
-                    cotizaciones y ventas
-                </p>
-
+                <h1>Seguimiento de Proyectos</h1>
+                <p>Control de oportunidades, cotizaciones y ventas</p>
             </div>
-
         </div>
-
 
         <div class="contador">
-
-            <span id="contadorProyectos">
-                0 proyectos registrados
-            </span>
-
+            <span id="contadorProyectos">0 proyectos registrados</span>
         </div>
-
     </header>
 
-
-
-    <!-- ================================================
-    ENCABEZADO DE IMPRESIÓN
-    ================================================= -->
-
     <section class="encabezado-impresion">
-
         <div class="impresion-logo">
-
-            <img
-                src="assets/spirax-logo.png"
-                alt="Spirax Sarco"
-            >
-
+            <img src="assets/spirax-logo.png" alt="Spirax Sarco">
         </div>
-
 
         <div class="impresion-datos">
-
-            <h1 id="tituloReporte">
-                Reporte de Proyectos
-            </h1>
-
+            <h1 id="tituloReporte">Reporte de Proyectos</h1>
             <p id="datosReporte"></p>
-
         </div>
-
     </section>
-
-
 
     <main class="contenedor">
 
-
-        <!-- ================================================
-        DASHBOARD
-        ================================================= -->
-
         <section class="dashboard">
 
-
             <div class="dashboard-titulo">
-
-                <h2>
-                    Resumen ejecutivo
-                </h2>
-
-                <p id="periodoActual">
-                    Indicadores del mes actual
-                </p>
-
+                <h2>Resumen ejecutivo</h2>
+                <p id="periodoActual">Indicadores del mes actual</p>
             </div>
-
-
-
-            <!-- KPI -->
 
             <div class="kpi-grid">
 
-
                 <div class="kpi-card">
-
-                    <div class="kpi-icono">
-                        $
-                    </div>
-
+                    <div class="kpi-icono">$</div>
                     <div>
-
-                        <span class="kpi-titulo">
-                            Cotizado este mes
-                        </span>
-
-                        <h3 id="kpiCotizado">
-                            USD $0.00
-                        </h3>
-
-                        <small>
-                            Precio final enviado a Ventas
-                        </small>
-
+                        <span class="kpi-titulo">Cotizado este mes</span>
+                        <h3 id="kpiCotizado">USD $0.00</h3>
+                        <small>Precio final enviado a Ventas</small>
                     </div>
-
                 </div>
 
-
-
                 <div class="kpi-card">
-
-                    <div class="kpi-icono">
-                        ✓
-                    </div>
-
+                    <div class="kpi-icono">✓</div>
                     <div>
-
-                        <span class="kpi-titulo">
-                            Vendido este mes
-                        </span>
-
-                        <h3 id="kpiVendido">
-                            USD $0.00
-                        </h3>
-
-                        <small>
-                            Proyectos ganados
-                        </small>
-
+                        <span class="kpi-titulo">Vendido este mes</span>
+                        <h3 id="kpiVendido">USD $0.00</h3>
+                        <small>Proyectos ganados</small>
                     </div>
-
                 </div>
 
-
-
                 <div class="kpi-card">
-
-                    <div class="kpi-icono">
-                        #
-                    </div>
-
+                    <div class="kpi-icono">#</div>
                     <div>
-
-                        <span class="kpi-titulo">
-                            Cotizaciones del mes
-                        </span>
-
-                        <h3 id="kpiCotizaciones">
-                            0
-                        </h3>
-
-                        <small>
-                            Oportunidades cotizadas
-                        </small>
-
+                        <span class="kpi-titulo">Cotizaciones del mes</span>
+                        <h3 id="kpiCotizaciones">0</h3>
+                        <small>Oportunidades cotizadas</small>
                     </div>
-
                 </div>
 
-
-
                 <div class="kpi-card">
-
-                    <div class="kpi-icono">
-                        %
-                    </div>
-
+                    <div class="kpi-icono">%</div>
                     <div>
-
-                        <span class="kpi-titulo">
-                            Conversión del mes
-                        </span>
-
-                        <h3 id="kpiConversion">
-                            0%
-                        </h3>
-
-                        <small>
-                            Vendido / Cotizado
-                        </small>
-
+                        <span class="kpi-titulo">Conversión del mes</span>
+                        <h3 id="kpiConversion">0%</h3>
+                        <small>Vendido / Cotizado</small>
                     </div>
-
                 </div>
-
 
             </div>
-
-
-
-            <!-- ================================================
-            GRÁFICAS MENSUALES
-            ================================================= -->
 
             <div class="graficas-grid">
 
-
                 <div class="tarjeta grafica-card">
-
                     <div class="titulo-grafica">
-
-                        <h3>
-                            Monto cotizado por mes
-                        </h3>
-
+                        <h3>Monto cotizado por mes</h3>
                         <p id="tituloGraficaMonto"></p>
-
                     </div>
-
-
-                    <div
-                        id="graficaMonto"
-                        class="grafica-barras">
-                    </div>
-
+                    <div id="graficaMonto" class="grafica-barras"></div>
                 </div>
-
-
 
                 <div class="tarjeta grafica-card">
-
                     <div class="titulo-grafica">
-
-                        <h3>
-                            Número de cotizaciones
-                        </h3>
-
+                        <h3>Número de cotizaciones</h3>
                         <p id="tituloGraficaCantidad"></p>
-
                     </div>
-
-
-                    <div
-                        id="graficaCantidad"
-                        class="grafica-barras">
-                    </div>
-
+                    <div id="graficaCantidad" class="grafica-barras"></div>
                 </div>
-
 
             </div>
-
-
-
-            <!-- ================================================
-            GRÁFICA POR VENDEDOR
-            ================================================= -->
 
             <div class="tarjeta grafica-vendedores-card">
-
-
                 <div class="titulo-seccion">
-
-                    <h2>
-                        Cotizado vs Vendido por vendedor
-                    </h2>
-
+                    <h2>Cotizado vs Vendido por vendedor</h2>
                     <p id="periodoGraficaVendedores"></p>
-
                 </div>
-
-
-                <div
-                    id="graficaVendedores"
-                    class="grafica-vendedores">
-                </div>
-
-
+                <div id="graficaVendedores" class="grafica-vendedores"></div>
             </div>
-
-
-
-            <!-- ================================================
-            TABLA VENDEDORES
-            ================================================= -->
 
             <div class="tarjeta vendedor-resumen">
-
-
                 <div class="titulo-seccion">
-
-                    <h2>
-                        Desempeño por vendedor
-                    </h2>
-
+                    <h2>Desempeño por vendedor</h2>
                     <p id="periodoVendedores"></p>
-
                 </div>
-
 
                 <div class="tabla-contenedor">
-
-
                     <table class="tabla-vendedores">
-
-
                         <thead>
-
                             <tr>
-
-                                <th>
-                                    Vendedor
-                                </th>
-
-                                <th>
-                                    Cotizaciones
-                                </th>
-
-                                <th>
-                                    Monto cotizado USD
-                                </th>
-
-                                <th>
-                                    Ganados
-                                </th>
-
-                                <th>
-                                    Vendido USD
-                                </th>
-
-                                <th>
-                                    Conversión
-                                </th>
-
+                                <th>Vendedor</th>
+                                <th>Cotizaciones</th>
+                                <th>Monto cotizado USD</th>
+                                <th>Ganados</th>
+                                <th>Vendido USD</th>
+                                <th>Conversión</th>
                             </tr>
-
                         </thead>
-
-
-                        <tbody id="tablaVendedores">
-                        </tbody>
-
-
+                        <tbody id="tablaVendedores"></tbody>
                     </table>
-
-
                 </div>
-
-
             </div>
 
-
         </section>
-
-
-
-        <!-- ================================================
-        BOTONES
-        ================================================= -->
 
         <section class="barra-acciones no-print">
 
+            <button class="btn btn-azul" id="btnNuevo" type="button">
+                + Nuevo proyecto
+            </button>
+
+            <button class="btn btn-gris" id="btnReporte" type="button">
+                Imprimir reporte
+            </button>
+
+            <button
+                class="btn btn-verde"
+                id="btnObjetivos"
+                type="button"
+                onclick="window.location.href='objetivos.html'"
+            >
+                🎯 Objetivos
+            </button>
 
             <button
                 class="btn btn-azul"
-                id="btnNuevo"
+                id="btnCalculadora"
+                type="button"
+                onclick="window.location.href='calculadora.html'"
             >
-
-                + Nuevo proyecto
-
+                🧮 Calculadora de cotización
             </button>
-
-
-
-            <button
-                class="btn btn-gris"
-                id="btnReporte"
-            >
-
-                Imprimir reporte
-
-            </button>
-
 
         </section>
 
-
-
-        <!-- ================================================
-        FORMULARIO
-        ================================================= -->
-
-        <section
-            class="tarjeta no-print"
-            id="seccionFormulario"
-        >
-
+        <section class="tarjeta no-print" id="seccionFormulario">
 
             <div class="titulo-seccion">
-
-                <h2 id="tituloFormulario">
-                    Nuevo proyecto
-                </h2>
-
+                <h2 id="tituloFormulario">Nuevo proyecto</h2>
             </div>
-
-
 
             <form id="formProyecto">
 
-
                 <div class="formulario-grid">
 
-
-
                     <div class="campo">
-
-                        <label>
-                            Número de oportunidad
-                        </label>
-
-                        <input
-                            type="text"
-                            id="oportunidad"
-                            placeholder="Ej. OPP-000000"
-                        >
-
+                        <label>Número de oportunidad</label>
+                        <input type="text" id="oportunidad" placeholder="Ej. OPP-000000">
                     </div>
 
-
-
-                    <!-- NUEVO: CLIENTE -->
-
                     <div class="campo">
-
-                        <label>
-                            Nombre del cliente
-                        </label>
-
-                        <input
-                            type="text"
-                            id="cliente"
-                            placeholder="Nombre de la empresa / cliente"
-                        >
-
+                        <label>Nombre del cliente</label>
+                        <input type="text" id="cliente" placeholder="Nombre de la empresa / cliente">
                     </div>
 
-
-
                     <div class="campo">
-
-                        <label>
-                            Tipo de proyecto
-                        </label>
-
+                        <label>Tipo de proyecto</label>
                         <select id="tipoProyecto">
-
-                            <option value="">
-                                Seleccionar
-                            </option>
-
-                            <option value="Llave en mano">
-                                Llave en mano
-                            </option>
-
-                            <option value="Ingeniería">
-                                Ingeniería
-                            </option>
-
-                            <option value="Instalación">
-                                Instalación
-                            </option>
-
+                            <option value="">Seleccionar</option>
+                            <option value="Llave en mano">Llave en mano</option>
+                            <option value="Ingeniería">Ingeniería</option>
+                            <option value="Instalación">Instalación</option>
                         </select>
-
                     </div>
 
-
-
                     <div class="campo">
-
-                        <label>
-                            Fecha solicitud de Ventas
-                        </label>
-
-                        <input
-                            type="date"
-                            id="fechaSolicitud"
-                        >
-
+                        <label>Fecha solicitud de Ventas</label>
+                        <input type="date" id="fechaSolicitud">
                     </div>
 
-
-
                     <div class="campo">
-
-                        <label>
-                            Vendedor solicitante
-                        </label>
-
-                        <input
-                            type="text"
-                            id="vendedor"
-                            placeholder="Nombre del vendedor"
-                        >
-
+                        <label>Vendedor solicitante</label>
+                        <input type="text" id="vendedor" placeholder="Nombre del vendedor">
                     </div>
 
-
-
                     <div class="campo">
-
-                        <label>
-                            Fecha envío de cotización
-                        </label>
-
-                        <input
-                            type="date"
-                            id="fechaCotizacion"
-                        >
-
+                        <label>Fecha envío de cotización</label>
+                        <input type="date" id="fechaCotizacion">
                     </div>
 
-
-
                     <div class="campo">
-
-                        <label>
-                            Estatus
-                        </label>
-
+                        <label>Estatus</label>
                         <select id="estatus">
-
-                            <option value="">
-                                Seleccionar
-                            </option>
-
-                            <option value="Abierto">
-                                Abierto
-                            </option>
-
-                            <option value="En cotización">
-                                En cotización
-                            </option>
-
-                            <option value="Ganado">
-                                Ganado
-                            </option>
-
-                            <option value="Cerrado">
-                                Cerrado
-                            </option>
-
-                            <option value="Perdido">
-                                Perdido
-                            </option>
-
+                            <option value="">Seleccionar</option>
+                            <option value="Abierto">Abierto</option>
+                            <option value="En cotización">En cotización</option>
+                            <option value="Ganado">Ganado</option>
+                            <option value="Cerrado">Cerrado</option>
+                            <option value="Perdido">Perdido</option>
                         </select>
-
                     </div>
 
-
-
-                    <!-- SOLO GANADO -->
-
-                    <div
-                        class="campo oculto"
-                        id="contenedorFechaGanado"
-                    >
-
-                        <label>
-                            Fecha de venta / ganado
-                        </label>
-
-                        <input
-                            type="date"
-                            id="fechaGanado"
-                        >
-
+                    <div class="campo oculto" id="contenedorFechaGanado">
+                        <label>Fecha de venta / ganado</label>
+                        <input type="date" id="fechaGanado">
                     </div>
 
-
-
-                    <!-- NUEVO: SOLO PERDIDO -->
-
-                    <div
-                        class="campo oculto"
-                        id="contenedorMotivoPerdida"
-                    >
-
-                        <label>
-                            Motivo de pérdida
-                        </label>
-
+                    <div class="campo oculto" id="contenedorMotivoPerdida">
+                        <label>Motivo de pérdida</label>
                         <select id="motivoPerdida">
-
-                            <option value="">
-                                Seleccionar motivo
-                            </option>
-
-                            <option value="Precio alto">
-                                Precio alto
-                            </option>
-
-                            <option value="Falta de información">
-                                Falta de información
-                            </option>
-
-                            <option value="Fuera del alcance">
-                                Fuera del alcance
-                            </option>
-
-                            <option value="Tiempo excesivo de cotización">
-                                Tiempo excesivo de cotización
-                            </option>
-
-                            <option value="Cliente canceló el proyecto">
-                                Cliente canceló el proyecto
-                            </option>
-
-                            <option value="Ganó la competencia">
-                                Ganó la competencia
-                            </option>
-
-                            <option value="Sin respuesta del cliente">
-                                Sin respuesta del cliente
-                            </option>
-
-                            <option value="Otro">
-                                Otro
-                            </option>
-
+                            <option value="">Seleccionar motivo</option>
+                            <option value="Precio alto">Precio alto</option>
+                            <option value="Falta de información">Falta de información</option>
+                            <option value="Fuera del alcance">Fuera del alcance</option>
+                            <option value="Tiempo excesivo de cotización">Tiempo excesivo de cotización</option>
+                            <option value="Cliente canceló el proyecto">Cliente canceló el proyecto</option>
+                            <option value="Ganó la competencia">Ganó la competencia</option>
+                            <option value="Sin respuesta del cliente">Sin respuesta del cliente</option>
+                            <option value="Otro">Otro</option>
                         </select>
-
                     </div>
 
-
-
                     <div class="campo">
-
-                        <label>
-                            Precio de venta (USD)
-                        </label>
-
+                        <label>Precio de venta (USD)</label>
                         <div class="input-moneda">
-
-                            <span>
-                                USD $
-                            </span>
-
-                            <input
-                                type="number"
-                                id="precioVenta"
-                                step="0.01"
-                                placeholder="0.00"
-                            >
-
+                            <span>USD $</span>
+                            <input type="number" id="precioVenta" step="0.01" placeholder="0.00">
                         </div>
-
                     </div>
 
-
-
                     <div class="campo">
-
-                        <label>
-                            Precio cotizado por contratista
-                        </label>
-
-                        <input
-                            type="number"
-                            id="precioContratista"
-                            step="0.01"
-                            placeholder="0.00"
-                        >
-
+                        <label>Precio cotizado por contratista</label>
+                        <input type="number" id="precioContratista" step="0.01" placeholder="0.00">
                     </div>
 
-
-
                     <div class="campo">
-
-                        <label>
-                            Moneda contratista
-                        </label>
-
+                        <label>Moneda contratista</label>
                         <select id="monedaContratista">
-
-                            <option value="MXN">
-                                MXN
-                            </option>
-
-                            <option value="USD">
-                                USD
-                            </option>
-
+                            <option value="MXN">MXN</option>
+                            <option value="USD">USD</option>
                         </select>
-
                     </div>
 
-
-
                     <div class="campo">
-
-                        <label>
-                            Contratista seleccionado
-                        </label>
-
-                        <input
-                            type="text"
-                            id="contratista"
-                            placeholder="Nombre del contratista"
-                        >
-
+                        <label>Contratista seleccionado</label>
+                        <input type="text" id="contratista" placeholder="Nombre del contratista">
                     </div>
 
-
-
                     <div class="campo">
-
-                        <label>
-                            Tipo de cambio
-                        </label>
-
-                        <input
-                            type="number"
-                            id="tipoCambio"
-                            step="0.0001"
-                            placeholder="Dato informativo"
-                        >
-
+                        <label>Tipo de cambio</label>
+                        <input type="number" id="tipoCambio" step="0.0001" placeholder="Dato informativo">
                     </div>
 
-
-
                     <div class="campo">
-
-                        <label>
-                            Margen del proyecto
-                        </label>
-
+                        <label>Margen del proyecto</label>
                         <select id="margen">
-
-                            <option value="">
-                                Seleccionar
-                            </option>
-
-                            <option value="38">
-                                38%
-                            </option>
-
-                            <option value="40">
-                                40%
-                            </option>
-
-                            <option value="45">
-                                45%
-                            </option>
-
-                            <option value="50">
-                                50%
-                            </option>
-
+                            <option value="">Seleccionar</option>
+                            <option value="38">38%</option>
+                            <option value="40">40%</option>
+                            <option value="45">45%</option>
+                            <option value="50">50%</option>
                         </select>
-
                     </div>
-
 
                 </div>
-
-
 
                 <div class="nota">
-
-                    Todos los precios de venta son registrados
-                    directamente en USD.
-
-                    El tipo de cambio es únicamente informativo
-                    y no participa en ningún cálculo.
-
+                    Todos los precios de venta son registrados directamente en USD.
+                    El tipo de cambio es únicamente informativo y no participa en ningún cálculo.
                 </div>
-
-
 
                 <div class="botones-formulario">
 
-
-                    <button
-                        type="button"
-                        class="btn btn-gris"
-                        id="btnLimpiar"
-                    >
+                    <button type="button" class="btn btn-gris" id="btnLimpiar">
                         Limpiar
                     </button>
 
-
-                    <button
-                        type="submit"
-                        class="btn btn-verde"
-                        id="btnGuardar"
-                    >
+                    <button type="submit" class="btn btn-verde" id="btnGuardar">
                         Guardar
                     </button>
 
-
-                    <button
-                        type="button"
-                        class="btn btn-azul"
-                        id="btnEditar"
-                        disabled
-                    >
+                    <button type="button" class="btn btn-azul" id="btnEditar" disabled>
                         Guardar cambios
                     </button>
 
-
                 </div>
-
 
             </form>
 
-
         </section>
-
-
-
-        <!-- ================================================
-        PROYECTOS REGISTRADOS
-        ================================================= -->
 
         <section class="tarjeta proyectos-registrados">
 
-
             <div class="titulo-seccion no-print">
-
-                <h2>
-                    Proyectos registrados
-                </h2>
-
+                <h2>Proyectos registrados</h2>
             </div>
 
-
-
             <div class="filtros no-print">
-
 
                 <input
                     type="text"
@@ -885,251 +329,98 @@
                     placeholder="Buscar oportunidad, cliente, vendedor o contratista"
                 >
 
-
-
                 <select id="filtroTipo">
-
-                    <option value="">
-                        Todos los tipos
-                    </option>
-
-                    <option value="Llave en mano">
-                        Llave en mano
-                    </option>
-
-                    <option value="Ingeniería">
-                        Ingeniería
-                    </option>
-
-                    <option value="Instalación">
-                        Instalación
-                    </option>
-
+                    <option value="">Todos los tipos</option>
+                    <option value="Llave en mano">Llave en mano</option>
+                    <option value="Ingeniería">Ingeniería</option>
+                    <option value="Instalación">Instalación</option>
                 </select>
-
-
 
                 <select id="filtroEstatus">
-
-                    <option value="">
-                        Todos los estatus
-                    </option>
-
-                    <option value="Abierto">
-                        Abierto
-                    </option>
-
-                    <option value="En cotización">
-                        En cotización
-                    </option>
-
-                    <option value="Ganado">
-                        Ganado
-                    </option>
-
-                    <option value="Cerrado">
-                        Cerrado
-                    </option>
-
-                    <option value="Perdido">
-                        Perdido
-                    </option>
-
+                    <option value="">Todos los estatus</option>
+                    <option value="Abierto">Abierto</option>
+                    <option value="En cotización">En cotización</option>
+                    <option value="Ganado">Ganado</option>
+                    <option value="Cerrado">Cerrado</option>
+                    <option value="Perdido">Perdido</option>
                 </select>
-
-
 
                 <select id="filtroVendedor">
-
-                    <option value="">
-                        Todos los vendedores
-                    </option>
-
+                    <option value="">Todos los vendedores</option>
                 </select>
 
-
-
-                <button
-                    class="btn btn-gris"
-                    id="btnLimpiarFiltros"
-                >
+                <button class="btn btn-gris" id="btnLimpiarFiltros" type="button">
                     Limpiar filtros
                 </button>
 
-
             </div>
-
-
 
             <div class="tabla-contenedor">
 
-
                 <table id="tablaProyectos">
 
-
                     <thead>
-
                         <tr>
-
-                            <th>
-                                Oportunidad
-                            </th>
-
-                            <th>
-                                Cliente
-                            </th>
-
-                            <th>
-                                Tipo
-                            </th>
-
-                            <th>
-                                Solicitud Ventas
-                            </th>
-
-                            <th>
-                                Vendedor
-                            </th>
-
-                            <th>
-                                Envío cotización
-                            </th>
-
-                            <th>
-                                Estatus
-                            </th>
-
-                            <th>
-                                Fecha ganado
-                            </th>
-
-                            <th>
-                                Motivo pérdida
-                            </th>
-
-                            <th>
-                                Precio venta USD
-                            </th>
-
-                            <th class="confidencial">
-                                Precio contratista
-                            </th>
-
-                            <th class="confidencial">
-                                Moneda costo
-                            </th>
-
-                            <th class="confidencial">
-                                Contratista
-                            </th>
-
-                            <th>
-                                Tipo cambio
-                            </th>
-
-                            <th class="confidencial">
-                                Margen
-                            </th>
-
-                            <th class="acciones-tabla">
-                                Acciones
-                            </th>
-
+                            <th>Oportunidad</th>
+                            <th>Cliente</th>
+                            <th>Tipo</th>
+                            <th>Solicitud Ventas</th>
+                            <th>Vendedor</th>
+                            <th>Envío cotización</th>
+                            <th>Estatus</th>
+                            <th>Fecha ganado</th>
+                            <th>Motivo pérdida</th>
+                            <th>Precio venta USD</th>
+                            <th class="confidencial">Precio contratista</th>
+                            <th class="confidencial">Moneda costo</th>
+                            <th class="confidencial">Contratista</th>
+                            <th>Tipo cambio</th>
+                            <th class="confidencial">Margen</th>
+                            <th class="acciones-tabla">Acciones</th>
                         </tr>
-
                     </thead>
 
-
-                    <tbody id="cuerpoTabla">
-                    </tbody>
-
+                    <tbody id="cuerpoTabla"></tbody>
 
                 </table>
 
-
             </div>
-
 
         </section>
 
-
     </main>
 
-
-
-    <!-- ================================================
-    MODAL REPORTE
-    ================================================= -->
-
-    <div
-        class="modal no-print"
-        id="modalReporte"
-    >
-
+    <div class="modal no-print" id="modalReporte">
 
         <div class="modal-contenido">
 
-
-            <h2>
-                Imprimir reporte
-            </h2>
-
+            <h2>Imprimir reporte</h2>
 
             <p>
-
                 Selecciona el tipo de reporte.
-
                 <br><br>
-
-                Se utilizarán los filtros aplicados
-                en la tabla de proyectos.
-
+                Se utilizarán los filtros aplicados en la tabla de proyectos.
             </p>
 
-
-
-            <button
-                class="btn btn-azul"
-                id="btnReporteVentas"
-            >
-
+            <button class="btn btn-azul" id="btnReporteVentas" type="button">
                 Ventas
-
             </button>
 
-
-
-            <button
-                class="btn btn-verde"
-                id="btnReporteProyectos"
-            >
-
+            <button class="btn btn-verde" id="btnReporteProyectos" type="button">
                 Proyectos
-
             </button>
 
-
-
-            <button
-                class="btn btn-gris"
-                id="btnCerrarModal"
-            >
-
+            <button class="btn btn-gris" id="btnCerrarModal" type="button">
                 Cancelar
-
             </button>
-
 
         </div>
 
-
     </div>
 
-
-
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
     <script src="app.js"></script>
 
-
 </body>
-
 </html>

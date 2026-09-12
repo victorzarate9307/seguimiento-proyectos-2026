@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objetivos 2026</title>
+    <link rel="stylesheet" href="objetivos.css">
+</head>
+<body>
+    <header class="topbar">
+        <div class="topbar-left">
+            <div class="logo-box">
+                <img src="assets/spirax-logo.png" alt="Spirax Sarco">
+            </div>
+            <div>
+                <h1>Objetivos 2026</h1>
+                <p>Seguimiento personal de metas y actividades</p>
+            </div>
+        </div>
+        <a class="btn btn-secondary" href="index.html">← Volver a proyectos</a>
+    </header>
+
+    <main class="page">
+        <section class="hero-grid">
+            <article class="hero-card hero-progress">
+                <div>
+                    <span class="eyebrow">AVANCE GENERAL</span>
+                    <h2 id="avanceGeneral">0%</h2>
+                    <p>Avance ponderado de objetivos 2026.</p>
+                </div>
+
+                <div class="progress-xl">
+                    <div id="barraGeneral" class="progress-fill"></div>
+                </div>
+
+                <div class="hero-note">
+                    <strong>Corte base:</strong>
+                    <input id="fechaCorte" type="date" value="2026-06-30">
+                    <button id="guardarCorte" class="mini-btn">Guardar</button>
+                </div>
+            </article>
+
+            <article class="hero-card">
+                <span class="eyebrow">RESUMEN</span>
+                <div class="summary-grid">
+                    <div>
+                        <strong id="seccionesCumplidas">0</strong>
+                        <span>Perspectivas al 100%</span>
+                    </div>
+                    <div>
+                        <strong id="proyectosGanadosNuevos">0</strong>
+                        <span>Ganados después del corte</span>
+                    </div>
+                    <div>
+                        <strong id="montoGanadoNuevo">$0.00</strong>
+                        <span>Nuevo monto ganado</span>
+                    </div>
+                    <div>
+                        <strong id="promedioCotizacion">—</strong>
+                        <span>Días hábiles promedio</span>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <section class="section-heading">
+            <div>
+                <h2>Objetivos corporativos</h2>
+                <p>Los avances de medio año están precargados. Los proyectos nuevos se suman automáticamente cuando corresponde.</p>
+            </div>
+        </section>
+
+        <div id="objetivosContainer" class="perspectives"></div>
+
+        <section class="section-heading actividad-heading">
+            <div>
+                <h2>Actividad mensual</h2>
+                <p>BBS, TAKE 5 y revisión de vehículo. La información se guarda en Supabase y se sincroniza entre tus dispositivos.</p>
+            </div>
+
+            <div class="month-selector">
+                <label for="mesActividad">Mes:</label>
+                <select id="mesActividad"></select>
+            </div>
+        </section>
+
+        <section class="activity-cards">
+            <article class="activity-card">
+                <span class="activity-icon">BBS</span>
+                <div>
+                    <span class="eyebrow">BBS DEL MES</span>
+                    <strong id="bbsValor">0</strong>
+                </div>
+                <div class="counter-actions">
+                    <button data-counter="bbs" data-delta="-1">−</button>
+                    <button data-counter="bbs" data-delta="1">+</button>
+                </div>
+            </article>
+
+            <article class="activity-card">
+                <span class="activity-icon">T5</span>
+                <div>
+                    <span class="eyebrow">TAKE 5 DEL MES</span>
+                    <strong id="take5Valor">0</strong>
+                </div>
+                <div class="counter-actions">
+                    <button data-counter="take5" data-delta="-1">−</button>
+                    <button data-counter="take5" data-delta="1">+</button>
+                </div>
+            </article>
+
+            <article class="activity-card">
+                <span class="activity-icon">RV</span>
+                <div>
+                    <span class="eyebrow">REVISIÓN VEHÍCULO</span>
+                    <strong id="vehiculoValor">0</strong>
+                </div>
+                <div class="counter-actions">
+                    <button data-counter="vehiculo" data-delta="-1">−</button>
+                    <button data-counter="vehiculo" data-delta="1">+</button>
+                </div>
+            </article>
+        </section>
+
+        <section class="panel chart-panel">
+            <div class="panel-title">
+                <div>
+                    <h3>Actividad anual 2026</h3>
+                    <p>Número de registros realizados por mes.</p>
+                </div>
+
+                <div class="legend">
+                    <span><i class="legend-dot bbs"></i>BBS</span>
+                    <span><i class="legend-dot take5"></i>TAKE 5</span>
+                    <span><i class="legend-dot vehiculo"></i>Vehículo</span>
+                </div>
+            </div>
+
+            <div id="graficaActividad" class="annual-chart"></div>
+        </section>
+
+        <section class="privacy-note">
+            <strong>Sincronización:</strong> los proyectos, avances manuales y actividades mensuales se almacenan en Supabase asociados a tu usuario.
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="objetivos.js"></script>
+</body>
+</html>
