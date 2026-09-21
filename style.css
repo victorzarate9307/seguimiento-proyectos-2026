@@ -857,3 +857,466 @@ td {
     }
 
 }
+/* =========================================================
+   INTERFAZ 2026 — SIDEBAR CORPORATIVO
+   ========================================================= */
+:root {
+    --sidebar-ancho: 270px;
+    --sidebar-fondo: #123f69;
+    --sidebar-fondo-2: #0d3559;
+    --sidebar-activo: #2a6fa8;
+}
+
+body.app-con-sidebar {
+    padding-left: var(--sidebar-ancho);
+    min-height: 100vh;
+}
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: var(--sidebar-ancho);
+    z-index: 1200;
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    background: linear-gradient(180deg, var(--sidebar-fondo) 0%, var(--sidebar-fondo-2) 100%);
+    box-shadow: 8px 0 28px rgba(10, 36, 61, .12);
+}
+
+.sidebar-logo-wrap {
+    padding: 22px 22px 12px;
+}
+
+.sidebar-logo {
+    display: block;
+    width: 100%;
+    height: 76px;
+    object-fit: contain;
+    background: #fff;
+    border-radius: 13px;
+    padding: 10px 18px;
+    box-shadow: 0 8px 22px rgba(0,0,0,.10);
+}
+
+.sidebar-perfil {
+    padding: 10px 22px 18px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,.18);
+}
+
+.perfil-foto {
+    display: block;
+    width: 112px;
+    height: 112px;
+    margin: 0 auto 10px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid rgba(255,255,255,.95);
+    box-shadow: 0 7px 20px rgba(0,0,0,.18);
+}
+
+.sidebar-perfil strong {
+    display: block;
+    font-size: 18px;
+    line-height: 1.2;
+}
+
+.sidebar-perfil span {
+    display: block;
+    margin-top: 4px;
+    font-size: 12px;
+    color: rgba(255,255,255,.78);
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 18px 14px;
+}
+
+.nav-item {
+    position: relative;
+    width: 100%;
+    min-height: 52px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 13px;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    background: transparent;
+    color: rgba(255,255,255,.92);
+    font: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform .16s ease, background .16s ease, border-color .16s ease, box-shadow .16s ease;
+}
+
+.nav-item:hover,
+.nav-item:focus-visible {
+    outline: none;
+    transform: translateX(3px);
+    background: rgba(255,255,255,.09);
+    border-color: rgba(255,255,255,.10);
+}
+
+.nav-item.activo {
+    background: linear-gradient(135deg, #2d78b6, #245f92);
+    border-color: rgba(255,255,255,.10);
+    box-shadow: 0 8px 18px rgba(0,0,0,.14);
+}
+
+.nav-icon {
+    width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
+    display: grid;
+    place-items: center;
+    border-radius: 9px;
+    background: rgba(255,255,255,.09);
+}
+
+.nav-item.activo .nav-icon {
+    background: rgba(255,255,255,.15);
+}
+
+.nav-icon svg,
+.reloj-linea svg {
+    width: 21px;
+    height: 21px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.sidebar-reloj {
+    margin-top: auto;
+    padding: 17px 20px 22px;
+    border-top: 1px solid rgba(255,255,255,.18);
+    background: rgba(0,0,0,.06);
+}
+
+.reloj-linea {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 30px;
+    color: rgba(255,255,255,.90);
+    font-size: 11px;
+}
+
+.reloj-linea svg {
+    width: 18px;
+    height: 18px;
+    flex: 0 0 18px;
+}
+
+.reloj-linea strong {
+    font-size: 14px;
+    letter-spacing: .2px;
+}
+
+/* Encabezado principal sin duplicar fecha/hora */
+body.app-con-sidebar .encabezado {
+    min-height: 118px;
+    padding: 20px 42px;
+}
+
+body.app-con-sidebar .contenedor {
+    width: calc(100% - 54px);
+    max-width: 1600px;
+    margin: 28px auto 50px;
+}
+
+/* Un poco más de presencia visual en los KPI */
+body.app-con-sidebar .kpi-card {
+    transition: transform .18s ease, box-shadow .18s ease;
+}
+
+body.app-con-sidebar .kpi-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 9px 24px rgba(20, 61, 96, .12);
+}
+
+/* Página independiente de proyectos */
+.pagina-proyectos #seccionFormulario {
+    margin-top: 0;
+}
+
+.pagina-proyectos .titulo-seccion p {
+    max-width: 760px;
+}
+
+@media (max-width: 1050px) {
+    :root { --sidebar-ancho: 230px; }
+    .sidebar-logo-wrap { padding-left: 16px; padding-right: 16px; }
+    .sidebar-logo { height: 68px; }
+    .perfil-foto { width: 94px; height: 94px; }
+    .sidebar-perfil strong { font-size: 16px; }
+    .nav-item { font-size: 12px; padding-left: 10px; padding-right: 10px; }
+    .nav-icon { width: 31px; height: 31px; flex-basis: 31px; }
+}
+
+@media (max-width: 820px) {
+    body.app-con-sidebar { padding-left: 0; }
+    .sidebar {
+        position: relative;
+        width: 100%;
+        min-height: auto;
+        bottom: auto;
+    }
+    .sidebar-logo-wrap {
+        padding: 12px 16px 6px;
+    }
+    .sidebar-logo {
+        width: 190px;
+        height: 58px;
+        padding: 7px 14px;
+    }
+    .sidebar-perfil {
+        display: none;
+    }
+    .sidebar-nav {
+        flex-direction: row;
+        overflow-x: auto;
+        padding: 9px 12px 12px;
+        gap: 6px;
+    }
+    .nav-item {
+        width: auto;
+        min-width: max-content;
+        min-height: 44px;
+        padding: 5px 10px;
+    }
+    .nav-item:hover { transform: none; }
+    .nav-icon { width: 29px; height: 29px; flex-basis: 29px; }
+    .nav-icon svg { width: 18px; height: 18px; }
+    .sidebar-reloj {
+        display: flex;
+        gap: 20px;
+        padding: 8px 15px 11px;
+    }
+    .reloj-linea { min-height: 22px; }
+    body.app-con-sidebar .encabezado { min-height: 100px; padding: 18px 22px; }
+    body.app-con-sidebar .contenedor { width: 94%; }
+}
+
+@media print {
+    body.app-con-sidebar { padding-left: 0 !important; }
+    .sidebar { display: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .nav-item,
+    body.app-con-sidebar .kpi-card { transition: none; }
+}
+
+/* =========================================================
+   AJUSTES V3 — PERFIL, LOGO Y FECHA/HORA EN ENCABEZADO
+   ========================================================= */
+.sidebar-logo-wrap {
+    padding: 18px 20px 10px;
+    overflow: hidden;
+}
+.sidebar-logo {
+    width: 100%;
+    height: 78px;
+    padding: 0;
+    object-fit: contain;
+    transform: scale(1.75);
+    transform-origin: center;
+    background: #fff;
+    border-radius: 13px;
+}
+.sidebar-perfil {
+    padding-top: 12px;
+}
+.perfil-foto {
+    width: 118px;
+    height: 118px;
+    object-fit: cover;
+    object-position: center;
+    background: #fff;
+}
+.sidebar-perfil span {
+    font-size: 13px;
+    color: rgba(255,255,255,.88);
+}
+.sidebar-reloj { display: none !important; }
+
+.encabezado-app {
+    display: grid !important;
+    grid-template-columns: minmax(210px, 270px) 1fr auto;
+    gap: 28px;
+    align-items: center;
+}
+.header-fecha-hora {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    padding-right: 22px;
+    border-right: 1px solid rgba(255,255,255,.24);
+}
+.header-tiempo-linea {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255,255,255,.96);
+    font-size: 12px;
+    white-space: nowrap;
+}
+.header-tiempo-linea svg {
+    width: 20px;
+    height: 20px;
+    flex: 0 0 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+.header-tiempo-linea strong { font-size: 15px; }
+.header-titulo-app { min-width: 0; }
+
+/* Nuevo proyecto ahora es únicamente captura */
+.pagina-proyectos .contenedor {
+    max-width: 1500px;
+}
+.pagina-proyectos #seccionFormulario {
+    margin-bottom: 0;
+}
+
+@media (max-width: 1200px) {
+    .encabezado-app {
+        grid-template-columns: 220px 1fr auto;
+        gap: 18px;
+    }
+    .header-tiempo-linea { font-size: 11px; }
+}
+@media (max-width: 900px) {
+    .encabezado-app {
+        display: flex !important;
+        flex-wrap: wrap;
+    }
+    .header-fecha-hora {
+        order: 2;
+        width: 100%;
+        flex-direction: row;
+        gap: 20px;
+        padding: 10px 0 0;
+        border-right: 0;
+        border-top: 1px solid rgba(255,255,255,.18);
+    }
+    .header-titulo-app { order: 1; flex: 1 1 auto; }
+    .encabezado-app .contador { order: 1; }
+}
+.modal.modal-activo { display: flex; }
+
+/* =========================================================
+   AJUSTES V4 — LOGO, FOTO Y KPI COTIZADO
+   ========================================================= */
+
+/* Logo: conserva la tarjeta blanca rectangular y da al logo
+   una proporción similar a la pantalla de Objetivos. */
+.sidebar-logo-wrap {
+    margin: 20px 22px 12px;
+    padding: 0;
+    height: 86px;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 7px 20px rgba(0,0,0,.10);
+}
+
+.sidebar-logo {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    transform: scale(1.7);
+    padding: 0;
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+/* Perfil: el archivo real del proyecto es victor-profile.jpeg. */
+.perfil-foto {
+    width: 118px;
+    height: 118px;
+    margin: 0 auto 10px;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+    border: 3px solid rgba(255,255,255,.95);
+    background: #fff;
+}
+
+/* Evita que el contenido de los KPI fuerce saltos innecesarios. */
+.kpi-card > div:last-child {
+    min-width: 0;
+    flex: 1 1 auto;
+}
+
+/* El importe de Cotizado este mes se mantiene en una sola línea
+   y queda centrado dentro de su área. */
+.kpi-card:first-child > div:last-child {
+    text-align: center;
+}
+
+#kpiCotizado {
+    width: 100%;
+    white-space: nowrap;
+    text-align: center;
+    font-size: clamp(18px, 1.28vw, 24px);
+    line-height: 1.15;
+}
+
+@media (max-width: 1200px) {
+    #kpiCotizado {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 1050px) {
+    .sidebar-logo {
+        height: 78px;
+        padding: 12px 20px;
+    }
+}
+
+/* LOGO CORPORATIVO UNIFICADO */
+.sidebar-logo-wrap {
+    margin: 20px 22px 12px;
+    padding: 0;
+    width: calc(100% - 44px);
+    height: 100px;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 7px 20px rgba(0,0,0,.10);
+}
+
+.sidebar-logo {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    transform: scale(1.7);
+    padding: 0;
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+}

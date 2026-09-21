@@ -733,6 +733,43 @@ function datosFechaActual() {
     };
 }
 
+
+function animarNumero(elemento, valorFinal, opciones = {}) {
+    if (!elemento) return;
+
+    const { duracion = 1200, tipo = "numero", decimales = 0 } = opciones;
+    const reducirMovimiento = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const final = Number(valorFinal) || 0;
+
+    function pintar(valor) {
+        if (tipo === "usd") {
+            elemento.textContent = "USD $" + Number(valor).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            return;
+        }
+        if (tipo === "porcentaje") {
+            elemento.textContent = Number(valor).toLocaleString("es-MX", { minimumFractionDigits: 0, maximumFractionDigits: decimales }) + "%";
+            return;
+        }
+        elemento.textContent = Math.round(Number(valor)).toLocaleString("es-MX");
+    }
+
+    if (reducirMovimiento || duracion <= 0) {
+        pintar(final);
+        return;
+    }
+
+    const inicio = performance.now();
+    function cuadro(ahora) {
+        const progreso = Math.min((ahora - inicio) / duracion, 1);
+        const suavizado = 1 - Math.pow(1 - progreso, 3);
+        pintar(final * suavizado);
+        if (progreso < 1) requestAnimationFrame(cuadro);
+        else pintar(final);
+    }
+    pintar(0);
+    requestAnimationFrame(cuadro);
+}
+
 function actualizarKPIs() {
     const fecha =
         datosFechaActual();
@@ -800,36 +837,29 @@ function actualizarKPIs() {
             100;
     }
 
-    document.getElementById(
-        "kpiCotizado"
-    ).textContent =
-        formatearUSD(
-            montoCotizado
-        );
+    animarNumero(
+        document.getElementById("kpiCotizado"),
+        montoCotizado,
+        { tipo: "usd", duracion: 1200 }
+    );
 
-    document.getElementById(
-        "kpiVendido"
-    ).textContent =
-        formatearUSD(
-            montoVendido
-        );
+    animarNumero(
+        document.getElementById("kpiVendido"),
+        montoVendido,
+        { tipo: "usd", duracion: 1200 }
+    );
 
-    document.getElementById(
-        "kpiCotizaciones"
-    ).textContent =
-        cotizacionesMes.length;
+    animarNumero(
+        document.getElementById("kpiCotizaciones"),
+        cotizacionesMes.length,
+        { tipo: "numero", duracion: 900 }
+    );
 
-    document.getElementById(
-        "kpiConversion"
-    ).textContent =
-        conversion.toLocaleString(
-            "es-MX",
-            {
-                maximumFractionDigits: 1
-            }
-        )
-        +
-        "%";
+    animarNumero(
+        document.getElementById("kpiConversion"),
+        conversion,
+        { tipo: "porcentaje", decimales: 1, duracion: 1100 }
+    );
 
     const nombreMes =
         fecha.hoy.toLocaleDateString(
