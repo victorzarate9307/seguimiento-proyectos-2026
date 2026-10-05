@@ -22,15 +22,22 @@ body {
     color: var(--texto);
 }
 
+
+/* =========================================================
+   ENCABEZADO
+   ========================================================= */
+
 .encabezado {
     min-height: 120px;
     background: linear-gradient(135deg, #113b5c, #286895);
     color: white;
     padding: 18px 42px;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.14);
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.14);
 }
 
 .encabezado-izquierda {
@@ -43,17 +50,21 @@ body {
     width: 226px;
     min-width: 226px;
     height: 100px;
+
     background: white;
     border-radius: 10px;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     overflow: hidden;
 }
 
 .logo-spirax {
     width: 260px;
     height: 84px;
+
     object-fit: contain;
     transform: scale(1.9);
 }
@@ -65,12 +76,18 @@ body {
 
 .encabezado p {
     font-size: 15px;
-    opacity: .9;
+    opacity: 0.9;
 }
+
+
+/* =========================================================
+   CONTENIDO
+   ========================================================= */
 
 .contenedor {
     width: 94%;
     max-width: 1450px;
+
     margin: 28px auto 55px;
 }
 
@@ -78,23 +95,30 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+
     margin-bottom: 20px;
 }
 
 .etiqueta {
     display: inline-block;
+
     padding: 6px 10px;
+
     border-radius: 20px;
+
     background: var(--azul-claro);
     color: var(--azul-oscuro);
+
     font-size: 11px;
     font-weight: 700;
+
     margin-bottom: 10px;
 }
 
 .intro h2 {
     color: var(--azul-oscuro);
     font-size: 26px;
+
     margin-bottom: 6px;
 }
 
@@ -103,18 +127,29 @@ body {
     font-size: 14px;
 }
 
+
+/* =========================================================
+   GRID PRINCIPAL
+   ========================================================= */
+
 .grid-principal {
     display: grid;
-    grid-template-columns: 1.08fr .92fr;
+
+    grid-template-columns: 1.08fr 0.92fr;
+
     gap: 22px;
+
     align-items: stretch;
 }
 
 .tarjeta {
     background: white;
+
     border: 1px solid #edf0f2;
     border-radius: 13px;
-    box-shadow: 0 2px 12px rgba(0,0,0,.07);
+
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+
     padding: 28px;
 }
 
@@ -125,18 +160,28 @@ body {
 .titulo-seccion h3,
 .formula-card h3 {
     color: var(--azul-oscuro);
+
     font-size: 20px;
+
     margin-bottom: 6px;
 }
 
 .titulo-seccion p {
     color: var(--texto-secundario);
+
     font-size: 12px;
 }
 
+
+/* =========================================================
+   FORMULARIO
+   ========================================================= */
+
 .form-grid {
     display: grid;
+
     grid-template-columns: 1fr 1fr;
+
     gap: 18px;
 }
 
@@ -152,7 +197,9 @@ body {
 .campo label {
     font-weight: 700;
     font-size: 13px;
+
     margin-bottom: 7px;
+
     color: #374151;
 }
 
@@ -160,10 +207,14 @@ body {
 .campo select {
     width: 100%;
     height: 46px;
+
     border: 1px solid #d1d5db;
     border-radius: 7px;
+
     padding: 0 12px;
+
     background: white;
+
     font-size: 15px;
     color: var(--texto);
 }
@@ -171,21 +222,33 @@ body {
 .campo input:focus,
 .campo select:focus {
     outline: none;
+
     border-color: var(--azul-medio);
-    box-shadow: 0 0 0 3px rgba(54,123,171,.10);
+
+    box-shadow: 0 0 0 3px rgba(54, 123, 171, 0.10);
 }
 
 .campo small {
     color: var(--texto-secundario);
+
     margin-top: 6px;
+
     font-size: 11px;
 }
 
+
+/* =========================================================
+   INPUT TIPO DE CAMBIO
+   ========================================================= */
+
 .input-con-sufijo {
     display: grid;
+
     grid-template-columns: 1fr auto;
+
     border: 1px solid #d1d5db;
     border-radius: 7px;
+
     overflow: hidden;
 }
 
@@ -196,32 +259,53 @@ body {
 
 .input-con-sufijo span {
     display: flex;
+
     align-items: center;
+
     padding: 0 14px;
+
     background: #edf3f7;
+
     color: var(--azul-oscuro);
+
     font-weight: 700;
     font-size: 12px;
+
     border-left: 1px solid #d1d5db;
 }
 
+
+/* =========================================================
+   BOTONES
+   ========================================================= */
+
 .acciones {
     display: flex;
+
     justify-content: flex-end;
+
     gap: 10px;
+
     margin-top: 24px;
 }
 
 .btn {
     border: none;
     border-radius: 7px;
+
     padding: 12px 18px;
+
     font-weight: 700;
+
     cursor: pointer;
+
     text-decoration: none;
+
     display: inline-flex;
+
     align-items: center;
     justify-content: center;
+
     font-size: 13px;
 }
 
@@ -236,54 +320,134 @@ body {
 }
 
 .btn-claro {
-    background: rgba(255,255,255,.14);
-    border: 1px solid rgba(255,255,255,.22);
+    background: rgba(255, 255, 255, 0.14);
+
+    border: 1px solid rgba(255, 255, 255, 0.22);
+
     color: white;
 }
 
 .btn-copiar {
     width: 100%;
+
     margin-top: 22px;
+
     background: var(--azul-claro);
+
     color: var(--azul-oscuro);
 }
 
 .btn:disabled {
-    opacity: .45;
+    opacity: 0.45;
+
     cursor: not-allowed;
 }
 
+
+/* =========================================================
+   RESULTADOS
+   ========================================================= */
+
 .resultados-card {
-    background: linear-gradient(180deg, #ffffff 0%, #f8fbfd 100%);
+    background: linear-gradient(
+        180deg,
+        #ffffff 0%,
+        #f8fbfd 100%
+    );
 }
 
+
+/* =========================================================
+   PRECIO ANTES DE IMPUESTOS
+   ========================================================= */
+
 .resultado-destacado {
+    width: 100%;
+
     border: 1px solid #cfe1ed;
-    background: var(--azul-claro);
     border-radius: 10px;
+
+    background: var(--azul-claro);
+
     padding: 22px;
+
     margin-bottom: 18px;
 }
 
-.resultado-destacado span,
-.resultado-total span {
+.resultado-destacado > span {
     display: block;
+
     font-size: 12px;
     font-weight: 700;
+
     color: var(--texto-secundario);
+
     text-transform: uppercase;
+
     margin-bottom: 6px;
 }
 
-.resultado-destacado strong {
+
+/*
+   IMPORTANTE:
+   El importe ocupa su propia línea.
+*/
+
+.resultado-destacado > strong {
+    display: block;
+
+    width: 100%;
+
     color: var(--azul-oscuro);
-    font-size: 32px;
+
+    font-size: clamp(27px, 2.2vw, 32px);
+    font-weight: 700;
+
+    line-height: 1.15;
+
+    white-space: nowrap;
 }
+
+
+/*
+   IMPORTE ESCRITO CON LETRA
+   Siempre debajo del número.
+*/
+
+.resultado-destacado > .resultado-en-letras {
+    display: block;
+
+    width: 100%;
+
+    margin-top: 11px;
+    padding-top: 9px;
+
+    border-top: 1px solid rgba(18, 61, 96, 0.12);
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+
+    line-height: 1.45;
+
+    color: #5f6f7b;
+
+    text-transform: none;
+}
+
+
+/* =========================================================
+   IVA
+   ========================================================= */
 
 .resultado-fila {
     display: flex;
+
     align-items: center;
     justify-content: space-between;
+
     padding: 12px 3px;
 }
 
@@ -293,65 +457,152 @@ body {
 
 .resultado-fila small {
     display: block;
+
     color: var(--texto-secundario);
+
     margin-top: 3px;
 }
 
 .resultado-fila strong {
     color: var(--azul-oscuro);
+
     font-size: 20px;
 }
 
+
+/* =========================================================
+   SEPARADOR
+   ========================================================= */
+
 .separador {
     height: 1px;
+
     background: #dfe4e8;
+
     margin: 8px 0 18px;
 }
+
+
+/* =========================================================
+   TOTAL CON IVA
+   ========================================================= */
 
 .resultado-total {
     padding: 18px 0;
 }
 
-.resultado-total strong {
+.resultado-total > span {
     display: block;
-    font-size: 35px;
-    color: var(--verde);
+
+    font-size: 12px;
+    font-weight: 700;
+
+    color: var(--texto-secundario);
+
+    text-transform: uppercase;
+
+    margin-bottom: 6px;
 }
+
+.resultado-total > strong {
+    display: block;
+
+    width: 100%;
+
+    font-size: clamp(30px, 2.4vw, 35px);
+    font-weight: 700;
+
+    line-height: 1.15;
+
+    color: var(--verde);
+
+    white-space: nowrap;
+}
+
+
+/*
+   Texto del total escrito con letra.
+*/
+
+.resultado-total > .resultado-en-letras {
+    display: block;
+
+    width: 100%;
+
+    margin-top: 8px;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+
+    line-height: 1.45;
+
+    color: #5f6f7b;
+
+    text-transform: none;
+}
+
+
+/* =========================================================
+   DETALLE DEL CÁLCULO
+   ========================================================= */
 
 .detalle-calculo {
     display: grid;
+
     grid-template-columns: 1fr 1fr;
+
     gap: 10px;
+
     margin-top: 6px;
 }
 
 .detalle-calculo div {
     border: 1px solid #e2e7eb;
+
     background: white;
+
     border-radius: 8px;
+
     padding: 13px;
 }
 
 .detalle-calculo span {
     display: block;
+
     color: var(--texto-secundario);
+
     font-size: 10px;
     text-transform: uppercase;
     font-weight: 700;
+
     margin-bottom: 5px;
 }
 
 .detalle-calculo strong {
     color: var(--azul-oscuro);
+
     font-size: 14px;
 }
 
+
+/* =========================================================
+   ERROR
+   ========================================================= */
+
 .mensaje-error {
     margin-top: 17px;
+
     padding: 12px 14px;
+
     border-radius: 7px;
+
     background: #fde8ea;
+
     color: #a32731;
+
     font-size: 13px;
     font-weight: 700;
 }
@@ -360,20 +611,30 @@ body {
     display: none !important;
 }
 
+
+/* =========================================================
+   EXPLICACIÓN DE FÓRMULA
+   ========================================================= */
+
 .formula-card {
     margin-top: 22px;
 }
 
 .formula-grid {
     display: grid;
+
     grid-template-columns: repeat(3, 1fr);
+
     gap: 16px;
+
     margin-top: 18px;
 }
 
 .formula-grid div {
     display: flex;
+
     gap: 12px;
+
     align-items: flex-start;
 }
 
@@ -381,22 +642,36 @@ body {
     width: 30px;
     min-width: 30px;
     height: 30px;
+
     border-radius: 50%;
+
     display: flex;
+
     justify-content: center;
     align-items: center;
+
     background: var(--azul-claro);
+
     color: var(--azul-oscuro);
+
     font-weight: 700;
 }
 
 .formula-grid p {
     color: var(--texto-secundario);
+
     font-size: 12px;
+
     line-height: 1.55;
 }
 
-@media(max-width: 900px) {
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
     .grid-principal,
     .formula-grid {
         grid-template-columns: 1fr;
@@ -404,13 +679,22 @@ body {
 
     .encabezado {
         flex-direction: column;
+
         align-items: flex-start;
+
         gap: 16px;
+
         padding: 20px;
     }
 }
 
-@media(max-width: 650px) {
+
+/* =========================================================
+   CELULAR
+   ========================================================= */
+
+@media (max-width: 650px) {
+
     .form-grid,
     .detalle-calculo {
         grid-template-columns: 1fr;
@@ -423,6 +707,7 @@ body {
     .logo-contenedor {
         width: 235px;
         min-width: 235px;
+
         height: 84px;
     }
 
@@ -431,8 +716,15 @@ body {
         height: 70px;
     }
 
-    .resultado-destacado strong,
-    .resultado-total strong {
+    .resultado-destacado > strong,
+    .resultado-total > strong {
         font-size: 27px;
+
+        white-space: normal;
+    }
+
+    .resultado-destacado > .resultado-en-letras,
+    .resultado-total > .resultado-en-letras {
+        font-size: 11px;
     }
 }
