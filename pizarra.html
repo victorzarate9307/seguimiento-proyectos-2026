@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizarra de Levantamientos</title>
+    <link rel="stylesheet" href="pizarra.css">
+</head>
+<body>
+
+<header class="barra-superior">
+    <a class="btn-volver" href="herramientas.html">← Herramientas</a>
+
+    <div class="titulo-pizarra">
+        <strong>Pizarra de Levantamientos</strong>
+        <span>Levantamiento sin guardar</span>
+    </div>
+
+    <div class="selector-reticula">
+        <label for="tipoReticula">Retícula</label>
+        <select id="tipoReticula">
+            <option value="isometrica" selected>Isométrica</option>
+            <option value="cuadricula">Cuadrícula</option>
+            <option value="lisa">Lisa</option>
+        </select>
+    </div>
+
+    <div class="acciones-superiores">
+        <button id="btnDeshacer" type="button">↶ <span>Deshacer</span></button>
+        <button id="btnRehacer" type="button">↷ <span>Rehacer</span></button>
+        <button id="btnLimpiar" type="button">Limpiar</button>
+        <button id="btnGuardar" class="btn-guardar" type="button">Guardar</button>
+    </div>
+</header>
+
+<div class="app-pizarra">
+    <aside class="barra-herramientas">
+        <div class="grupo-herramientas">
+            <span class="grupo-titulo">NAVEGACIÓN</span>
+            <button class="herramienta activa" data-tool="pan" type="button">
+                <span class="herramienta-icono">✋</span><span>Mover</span>
+            </button>
+        </div>
+
+        <div class="grupo-herramientas">
+            <span class="grupo-titulo">DIBUJO</span>
+            <button class="herramienta" data-tool="pen" type="button">
+                <span class="herramienta-icono">✎</span><span>Lápiz</span>
+            </button>
+            <div class="control-capa-lapiz">
+                <span>CAPA</span>
+                <div class="selector-capa-lapiz">
+                    <button class="activa" id="btnLapizAtras" type="button">Detrás</button>
+                    <button id="btnLapizAdelante" type="button">Frente</button>
+                </div>
+            </div>
+            <button class="herramienta" data-tool="eraser" type="button">
+                <span class="herramienta-icono">⌫</span><span>Borrador</span>
+            </button>
+            <button class="herramienta herramienta-bloqueada" disabled type="button">
+                <span class="herramienta-icono">T</span><span>Texto</span><small>Próximamente</small>
+            </button>
+            <button class="herramienta" data-tool="measure" type="button">
+                <span class="herramienta-icono">↔</span><span>Medida</span>
+            </button>
+            <button class="herramienta" data-tool="techline" type="button">
+                <span class="herramienta-icono">⌞</span><span>Línea técnica</span>
+            </button>
+        </div>
+
+        <div class="grupo-herramientas">
+            <span class="grupo-titulo">LEVANTAMIENTO</span>
+            <button class="herramienta" data-tool="scenario" type="button">
+                <span class="herramienta-icono">▱</span><span>Escenario</span>
+            </button>
+            <button class="herramienta" data-tool="pipe" type="button">
+                <span class="herramienta-icono">⌁</span><span>Tubería</span>
+            </button>
+            <button class="herramienta" data-tool="equipment" type="button">
+                <span class="herramienta-icono">⚙</span><span>Accesorios</span>
+            </button><button class="herramienta" data-tool="bom" type="button"><span class="herramienta-icono">☷</span><span>Lista de materiales</span></button>
+            <button class="herramienta herramienta-bloqueada" disabled type="button">
+                <span class="herramienta-icono">▣</span><span>Fotos</span><small>Próximamente</small>
+            </button>
+        </div>
+    </aside>
+
+    <main class="zona-trabajo" id="zonaTrabajo">
+        <div class="lienzo-mundo ret-isometrica" id="lienzoMundo">
+            <canvas id="canvasDibujo"></canvas>
+            <svg id="capaObjetos" viewBox="0 0 5000 5000" preserveAspectRatio="none"></svg>
+            <svg id="capaTuberia" viewBox="0 0 5000 5000" preserveAspectRatio="none"></svg>
+            <svg id="capaAccesorios" viewBox="0 0 5000 5000" preserveAspectRatio="none"></svg>
+            <svg id="capaTecnica" viewBox="0 0 5000 5000" preserveAspectRatio="none"></svg>
+            <canvas id="canvasDibujoFrente"></canvas>
+
+            <div class="mensaje-inicial" id="mensajeInicial">
+                <strong>Pizarra lista</strong>
+                <span>Selecciona Lápiz para dibujar o Escenario para construir el área.</span>
+                <small>Usa Mover para desplazarte y la rueda del mouse para hacer zoom.</small>
+            </div>
+        </div>
+
+        <div class="panel-escenario oculto panel-bom" id="panelBom"><div class="panel-escenario-head"><div><strong>Lista de materiales</strong><small>Resumen automático</small></div><button id="cerrarPanelBom" type="button">×</button></div><div id="bomContenido" class="bom-contenido"></div></div>
+<div class="panel-escenario oculto panel-accesorios" id="panelAccesorios">
+<div class="panel-escenario-head"><div><strong>Accesorios</strong><small>Selecciona y coloca sobre la tubería</small></div><button id="cerrarPanelAccesorios" type="button">×</button></div>
+<div class="grupo-accesorios"><span class="grupo-titulo">CONEXIONES</span><div class="biblioteca accesorios-grid">
+<button data-fitting="elbow90" type="button"><b>⌞</b><span>Codo 90°</span></button><button data-fitting="elbow45" type="button"><b>／</b><span>Codo 45°</span></button><button data-fitting="tee" type="button"><b>⊥</b><span>Tee</span></button><button data-fitting="reducer" type="button"><b>▷</b><span>Reducción</span></button><button data-fitting="flange" type="button"><b>║</b><span>Brida</span></button>
+</div></div>
+<div class="grupo-accesorios"><span class="grupo-titulo">EQUIPOS REALES</span><div class="biblioteca accesorios-grid accesorios-grid-real">
+<button data-fitting="spirax" type="button" class="equipo-spirax-btn"><b>SPX</b><span>Equipo Spirax</span><small>Catálogo 2026</small></button>
+</div></div>
+<div class="estado-tecnico" id="estadoAccesorio">Selecciona un accesorio y toca la tubería.</div></div>
+
+<div class="panel-tecnico oculto panel-biblioteca-real" id="panelBibliotecaReal">
+ <div class="panel-tecnico-head"><div><strong>Biblioteca técnica Spirax 2026</strong><small id="catalogCount">Catálogo documental</small></div><button id="cerrarBibliotecaReal" type="button">×</button></div>
+ <div class="real-grid real-grid-search">
+  <label>Buscar equipo<input id="realSearch" type="search" placeholder="Ej. FT14, TD52, 25P, separador..."></label>
+  <label>Familia<select id="realFamily"><option value="">Todas</option></select></label>
+  <label>Ficha / familia de producto<select id="realProduct"></select></label>
+  <label>Modelo / variante<select id="realVariant"></select></label>
+  <label>Tamaño<select id="realSize"></select></label>
+  <label>Conexión / variante<select id="realConnection"></select></label>
+ </div>
+ <div class="ficha-real" id="fichaReal"></div>
+ <button class="btn-usar-equipo" id="btnUsarEquipoReal" type="button">Usar este equipo</button>
+ <div class="estado-tecnico" id="estadoEquipoReal">Selecciona un producto documentado.</div>
+</div>
+
+<div class="panel-tecnico oculto" id="panelTuberia">
+            <div class="panel-tecnico-head">
+                <div><strong>Tubería</strong><small>Recorrido isométrico · metros</small></div>
+                <button id="cerrarPanelTuberia" type="button">×</button>
+            </div>
+
+            <div class="pipe-grid">
+                <label>Diámetro
+                    <select id="pipeDiameter">
+                        <option>1/2"</option><option>3/4"</option><option>1"</option>
+                        <option>1 1/4"</option><option>1 1/2"</option><option selected>2"</option>
+                        <option>2 1/2"</option><option>3"</option><option>4"</option><option>6"</option><option>8"</option>
+                    </select>
+                </label>
+                <label>Material
+                    <select id="pipeMaterial">
+                        <option selected>Acero al carbón</option>
+                        <option>Acero inoxidable</option>
+                        <option>Cobre</option>
+                        <option>PVC</option>
+                        <option>Otro</option>
+                    </select>
+                </label>
+                <label>Cédula
+                    <select id="pipeSchedule">
+                        <option>10</option><option selected>40</option><option>80</option><option>N/A</option>
+                    </select>
+                </label>
+                <label>Estado
+                    <select id="pipeStatus">
+                        <option value="new" selected>Nueva</option>
+                        <option value="existing">Existente</option>
+                        <option value="remove">Retirar</option>
+                    </select>
+                </label>
+            </div>
+
+            <label>Modo
+                <select id="pipeMode">
+                    <option value="assisted">Recta asistida</option>
+                    <option value="length">Por longitud</option>
+                </select>
+            </label>
+
+            <div id="pipeLengthMode" class="oculto">
+                <label>Longitud
+                    <div class="entrada-metros"><input id="pipeLength" type="number" min="0.01" step="0.01" value="1.00"><b>m</b></div>
+                </label>
+                <div class="direcciones pipe-direcciones">
+                    <button data-pipe-dir="ul" type="button">↖</button><span></span><button data-pipe-dir="ur" type="button">↗</button>
+                    <button data-pipe-dir="l" type="button">←</button><button data-pipe-dir="r" class="activa" type="button">→</button><button data-pipe-dir="dr" type="button">↘</button>
+                    <span></span><span></span><button data-pipe-dir="dl" type="button">↙</button>
+                </div>
+                <small>Toca el punto inicial. El siguiente tramo conserva la misma especificación.</small>
+            </div>
+
+            <p id="pipeAssistedHelp">Toca el inicio y después el final. El tramo se pega a la retícula. Continúa desde la punta para cambiar de dirección.</p>
+            <div class="estado-tecnico" id="estadoTuberia">Esperando punto inicial</div>
+        </div>
+
+        <div class="panel-tecnico oculto" id="panelTecnico">
+            <div class="panel-tecnico-head">
+                <div><strong id="tituloPanelTecnico">Medida</strong><small>Unidad: metros</small></div>
+                <button id="cerrarPanelTecnico" type="button">×</button>
+            </div>
+            <div id="contenidoMedida">
+                <p>Marca el punto A y después el punto B. La cota se ajusta a los ejes isométricos.</p>
+                <div class="estado-tecnico" id="estadoMedida">Esperando punto A</div>
+            </div>
+            <div class="oculto" id="contenidoLinea">
+                <label>Modo
+                    <select id="modoLinea">
+                        <option value="assisted">Recta asistida</option>
+                        <option value="length">Por longitud</option>
+                    </select>
+                </label>
+                <div id="modoLongitud" class="oculto">
+                    <label>Longitud
+                        <div class="entrada-metros"><input id="longitudLinea" type="number" min="0.01" step="0.01" value="1.00"><b>m</b></div>
+                    </label>
+                    <div class="direcciones">
+                        <button data-dir="ul" type="button">↖</button><button data-dir="u" type="button">↑</button><button data-dir="ur" type="button">↗</button>
+                        <button data-dir="l" type="button">←</button><button data-dir="r" class="activa" type="button">→</button><button data-dir="dr" type="button">↘</button>
+                        <span></span><button data-dir="dl" type="button">↙</button><span></span>
+                    </div>
+                    <small>Toca el punto donde debe iniciar la línea.</small>
+                </div>
+                <p id="ayudaAsistida">Toca inicio y final. Se endereza sola al eje isométrico más cercano.</p>
+                <div class="estado-tecnico" id="estadoLinea">Esperando punto inicial</div>
+            </div>
+        </div>
+
+        <div class="panel-escenario oculto" id="panelEscenario">
+            <div class="panel-cabecera">
+                <div>
+                    <strong>Escenario</strong>
+                    <span>Elementos de referencia</span>
+                </div>
+                <button id="cerrarEscenario" type="button">×</button>
+            </div>
+
+            <div class="biblioteca-escenario">
+                <button data-scene="wall"><b>▰</b><span>Pared</span></button>
+                <button data-scene="floor"><b>◇</b><span>Piso</span></button>
+                <button data-scene="ceiling"><b>⌂</b><span>Techo</span></button>
+                <button data-scene="column"><b>▥</b><span>Columna</span></button>
+                <button data-scene="platform"><b>▱</b><span>Plataforma</span></button>
+                <button data-scene="door"><b>▯</b><span>Puerta</span></button>
+                <button data-scene="stairs"><b>≋</b><span>Escalera</span></button>
+                <button data-scene="generic"><b>□</b><span>Equipo genérico</span></button>
+                <button data-scene="boiler"><b>▣</b><span>Caldera</span></button>
+                <button data-scene="tankV"><b>⬭</b><span>Tanque vertical</span></button>
+                <button data-scene="tankH"><b>⬯</b><span>Tanque horizontal</span></button>
+                <button data-scene="exchanger"><b>⇄</b><span>Intercambiador</span></button>
+                <button data-scene="pump"><b>◉</b><span>Bomba</span></button>
+            </div>
+
+            <div class="panel-pie">
+                <button id="btnBloquearEscenario" type="button">🔓 Escenario desbloqueado</button>
+            </div>
+        </div>
+
+        <div class="barra-edicion-global oculto" id="barraEdicionGlobal">
+    <div class="edicion-info"><small>SELECCIONADO</small><strong id="edicionNombre">Elemento</strong></div>
+    <div class="edicion-acciones">
+        <button id="edicionMover" type="button">✥ Mover</button>
+        <button id="edicionEditar" type="button">✎ Editar</button>
+        <button id="edicionDuplicar" type="button">⧉ Duplicar</button>
+        <button id="edicionEliminar" class="peligro" type="button">🗑 Eliminar</button>
+        <button id="edicionCerrar" class="solo-icono" type="button">×</button>
+    </div>
+</div>
+<div class="modal-fondo oculto" id="modalMedida">
+        <div class="modal">
+            <div class="modal-head">
+                <div><h3>Medida real</h3><p>Escribe la distancia real en metros.</p></div>
+                <button id="cerrarModalMedida" type="button">×</button>
+            </div>
+            <form id="formMedida">
+                <label>Distancia
+                    <div class="entrada-metros grande"><input id="valorMedida" type="number" min="0.01" step="0.01" required><b>m</b></div>
+                </label>
+                <div class="modal-acciones">
+                    <button class="secundario" id="cancelarMedida" type="button">Cancelar</button>
+                    <button class="primario" type="submit">Agregar cota</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-fondo oculto" id="modalFondo">
+            <form class="modal-dimensiones" id="formDimensiones">
+                <div class="modal-cabecera">
+                    <div>
+                        <strong id="modalTitulo">Insertar elemento</strong>
+                        <span>Dimensiones reales de referencia</span>
+                    </div>
+                    <button id="cerrarModal" type="button">×</button>
+                </div>
+
+                <div class="campos-dimensiones">
+                    <label>
+                        Nombre / referencia
+                        <input id="nombreElemento" type="text" placeholder="Ej. Caldera 1">
+                    </label>
+                    <label>
+                        Largo (m)
+                        <input id="dimensionLargo" type="number" min="0.1" step="0.1" value="4">
+                    </label>
+                    <label>
+                        Ancho (m)
+                        <input id="dimensionAncho" type="number" min="0.1" step="0.1" value="2">
+                    </label>
+                    <label id="grupoDimensionAlto">
+                        <span id="labelDimensionAlto">Alto (m)</span>
+                        <input id="dimensionAlto" type="number" step="0.1" value="3">
+                    </label>
+                </div>
+
+                <small class="nota-dimensiones">
+                    Las dimensiones se guardan como datos reales. El tamaño visual se adapta para trabajar cómodamente en la pizarra.
+                </small>
+
+                <div class="modal-acciones">
+                    <button id="cancelarElemento" type="button">Cancelar</button>
+                    <button class="insertar" type="submit">Insertar en pizarra</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="pipe-tooltip oculto" id="pipeTooltip"></div>
+
+        <div class="barra-seleccion oculto" id="barraSeleccionTuberia">
+            <span id="seleccionTuberiaNombre">Tubería</span>
+            <button id="btnEditarTuberia" type="button">✎ Editar</button>
+            <button id="btnEliminarTuberia" class="btn-eliminar-objeto" type="button">🗑 Eliminar</button>
+        </div>
+
+        <div class="barra-seleccion oculto" id="barraSeleccionTecnica">
+            <span id="seleccionTecnicaNombre">Elemento técnico</span>
+            <button id="btnEditarTecnico" type="button">✎ Editar</button>
+            <button id="btnEliminarTecnico" class="btn-eliminar-objeto" type="button">🗑 Eliminar</button>
+        </div>
+
+        <div class="barra-seleccion oculto" id="barraSeleccion">
+            <span id="seleccionNombre">Elemento seleccionado</span>
+            <button id="btnEditarObjeto" type="button">✎ Editar</button>
+            <button id="btnEliminarObjeto" class="btn-eliminar-objeto" type="button">🗑 Eliminar</button>
+        </div>
+
+        <div id="interactionOverlay" aria-label="Capa de selección y movimiento"></div>
+<div class="controles-zoom">
+            <button id="btnZoomMenos" type="button">−</button>
+            <span id="textoZoom">100%</span>
+            <button id="btnZoomMas" type="button">+</button>
+            <button id="btnCentrar" type="button">⌂</button>
+        </div>
+
+        <div class="estado-herramienta"><span id="estadoHerramienta">Mover</span></div>
+    </main>
+</div>
+
+<script src="spirax-catalogo-2026.js"></script>
+<script src="pizarra.js"></script>
+</body>
+</html>

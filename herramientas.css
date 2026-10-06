@@ -1,0 +1,365 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --azul-oscuro: #123d60;
+    --azul: #21618c;
+    --azul-medio: #367bab;
+    --azul-claro: #e9f2f8;
+    --verde: #228b5a;
+    --gris-fondo: #f4f6f8;
+    --gris-borde: #dfe4e8;
+    --texto: #263238;
+    --texto-secundario: #68727d;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--gris-fondo);
+    color: var(--texto);
+}
+
+/* =========================================================
+   ENCABEZADO
+   ========================================================= */
+
+.encabezado {
+    min-height: 120px;
+    background: linear-gradient(135deg, #113b5c, #286895);
+    color: white;
+    padding: 18px 42px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.14);
+}
+
+.encabezado-izquierda {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+}
+
+.logo-contenedor {
+    width: 226px;
+    min-width: 226px;
+    height: 100px;
+
+    background: white;
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+}
+
+.logo-spirax {
+    width: 260px;
+    height: 84px;
+    object-fit: contain;
+    transform: scale(1.9);
+}
+
+.encabezado h1 {
+    font-size: 30px;
+    margin-bottom: 5px;
+}
+
+.encabezado p {
+    font-size: 15px;
+    opacity: 0.9;
+}
+
+/* =========================================================
+   CONTENIDO
+   ========================================================= */
+
+.contenedor {
+    width: 94%;
+    max-width: 1450px;
+    margin: 28px auto 55px;
+}
+
+.intro {
+    margin-bottom: 22px;
+}
+
+.etiqueta {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 20px;
+
+    background: var(--azul-claro);
+    color: var(--azul-oscuro);
+
+    font-size: 11px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.intro h2 {
+    color: var(--azul-oscuro);
+    font-size: 26px;
+    margin-bottom: 6px;
+}
+
+.intro p {
+    color: var(--texto-secundario);
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+/* =========================================================
+   TARJETAS
+   ========================================================= */
+
+.herramientas-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+    align-items: stretch;
+}
+
+.tarjeta {
+    background: white;
+    border: 1px solid #edf0f2;
+    border-radius: 13px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+}
+
+.herramienta-card {
+    min-height: 330px;
+    padding: 30px;
+
+    display: flex;
+    flex-direction: column;
+
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.herramienta-card:hover {
+    transform: translateY(-3px);
+    border-color: #cfe1ed;
+    box-shadow: 0 8px 24px rgba(18, 61, 96, 0.11);
+}
+
+.herramienta-icono {
+    width: 64px;
+    height: 64px;
+    border-radius: 14px;
+
+    background: var(--azul-claro);
+    color: var(--azul-oscuro);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 22px;
+}
+
+.herramienta-icono svg {
+    width: 31px;
+    height: 31px;
+
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.herramienta-contenido {
+    flex: 1;
+}
+
+.herramienta-tipo {
+    display: block;
+
+    color: var(--azul-medio);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+
+    margin-bottom: 7px;
+}
+
+.herramienta-card h3 {
+    color: var(--azul-oscuro);
+    font-size: 21px;
+    margin-bottom: 10px;
+}
+
+.herramienta-card p {
+    color: var(--texto-secundario);
+    font-size: 13px;
+    line-height: 1.65;
+    max-width: 560px;
+}
+
+/* =========================================================
+   BOTONES
+   ========================================================= */
+
+.btn {
+    border: none;
+    border-radius: 7px;
+    padding: 12px 18px;
+
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    font-size: 13px;
+}
+
+.btn-principal {
+    background: var(--azul);
+    color: white;
+
+    align-self: flex-start;
+    margin-top: 24px;
+
+    transition: background 0.18s ease, transform 0.18s ease;
+}
+
+.btn-principal:hover {
+    background: var(--azul-oscuro);
+}
+
+.btn-principal:active {
+    transform: translateY(1px);
+}
+
+.btn-claro {
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    color: white;
+}
+
+.btn-claro:hover {
+    background: rgba(255, 255, 255, 0.22);
+}
+
+/* =========================================================
+   NOTA INFERIOR
+   ========================================================= */
+
+.nota-card {
+    margin-top: 22px;
+    padding: 22px 26px;
+
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.nota-icono {
+    width: 42px;
+    min-width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--azul-claro);
+    color: var(--azul-oscuro);
+
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.nota-card h3 {
+    color: var(--azul-oscuro);
+    font-size: 15px;
+    margin-bottom: 4px;
+}
+
+.nota-card p {
+    color: var(--texto-secundario);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+    .encabezado {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        padding: 20px;
+    }
+
+    .herramientas-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .herramienta-card {
+        min-height: 285px;
+    }
+}
+
+/* =========================================================
+   CELULAR
+   ========================================================= */
+
+@media (max-width: 650px) {
+    .contenedor {
+        width: calc(100% - 28px);
+        margin-top: 20px;
+    }
+
+    .encabezado-izquierda {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .logo-contenedor {
+        width: 235px;
+        min-width: 235px;
+        height: 84px;
+    }
+
+    .logo-spirax {
+        width: 210px;
+        height: 70px;
+    }
+
+    .encabezado h1 {
+        font-size: 26px;
+    }
+
+    .herramienta-card {
+        min-height: 0;
+        padding: 24px;
+    }
+
+    .herramienta-icono {
+        width: 56px;
+        height: 56px;
+    }
+
+    .nota-card {
+        align-items: flex-start;
+    }
+}
