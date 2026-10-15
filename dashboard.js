@@ -528,27 +528,13 @@ function fechaCierreEfectiva(proyecto) {
     }
 
     /*
-       Los proyectos Ganados anteriores a esta mejora
-       ya tenían fechaGanado.
-
-       Podemos utilizar esa fecha como cierre histórico
-       sin modificar el registro original.
+        Quitamos la validación que usaba fechaGanado como cierre automático, 
+        para permitir que el proyecto siga apareciendo en el historial mensual 
+        de los meses donde estuvo activo o cotizándose.
     */
-
-    if (
-        proyecto.estatus === "Ganado" &&
-        proyecto.fechaGanado
-    ) {
-        return proyecto.fechaGanado;
-    }
-
+    
     return "";
 }
-
-
-/* =========================================================
-   PROYECTOS QUE EXISTÍAN EN EL MES SELECCIONADO
-   ========================================================= */
 
 function proyectoPerteneceAlPeriodo(proyecto) {
 
@@ -1180,9 +1166,9 @@ function actualizarKPIs() {
     const ganadosMes =
         proyectos.filter(
             p =>
-                p.estatus === "Ganado" &&
-                p.fechaGanado &&
-                p.fechaGanado.startsWith(
+                String(p.estatus || "").trim().toLowerCase() === "ganado" &&
+                (p.fechaGanado || p.fechaCotizacion) &&
+                (p.fechaGanado || p.fechaCotizacion).startsWith(
                     periodo.prefijoMes
                 )
         );
